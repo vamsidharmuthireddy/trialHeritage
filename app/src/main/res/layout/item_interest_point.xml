@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    <ImageView
+        android:id="@+id/imageview_interest_point_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+
+<!--    <TextView
+        android:id="@+id/textview_interest_point_name"
+        android:layout_alignStart="@+id/imageview_interest_point_image"
+        android:layout_alignEnd="@+id/imageview_interest_point_image"
+        android:layout_alignBottom="@+id/imageview_interest_point_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:gravity="center_horizontal"
+        android:text="Interest Point"
+        android:textSize="@dimen/activity_small_text" />-->
+
+    <TextView
+        android:id="@+id/textview_interest_point_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:text="Interest Point"
+        android:textSize="@dimen/activity_small_text" />
+
+</RelativeLayout>

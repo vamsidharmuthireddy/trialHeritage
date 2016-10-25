@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_listitem_height"
+    android:padding="@dimen/activity_std_padding">
+
+    <LinearLayout
+        android:id="@+id/layout_rowitem_package_name"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/layout_rowitem_package_image"
+        android:layout_weight="4"
+        android:padding="@dimen/activity_std_padding"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/rowitem_textview_package_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_std_margin"
+            android:text="Package"
+            android:textSize="@dimen/activity_medium_text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_rowitem_package_button"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/layout_rowitem_package_image"
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:id="@+id/rowitem_button_package_button"
+            android:layout_width="@dimen/activity_large_icon"
+            android:layout_height="@dimen/activity_large_icon"
+            android:background="@color/colorWhite"
+            android:drawableStart="@drawable/ic_download_black_32dp"
+            style="?android:attr/borderlessButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentBottom="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/golkonda_home_1"
+                android:scaleType="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:elevation="1dp"
+                android:text="Golkonda, also known as Golconda, Golkonda (&quot;Round shaped hill&quot;), or Golla konda (&quot;Shepherd's hill&quot;), is a citadel and fort in Southern India and was the capital of the medieval sultanate of the Qutub Shahi dynasty (c.1518–1687), is situated 11 kilometres (6.8 mi) west of Hyderabad. It is also a tehsil of Hyderabad district, Telangana, India. The region is known for the mines that have produced some of the world's most famous gems, including the Koh-i-Noor, the Hope Diamond and the Nassak Diamond."
+                android:textSize="20sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
