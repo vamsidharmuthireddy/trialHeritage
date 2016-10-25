@@ -20,11 +20,22 @@ public class LaunchPreferenceManager {
         editor = preferences.edit();
     }
 
+    /**
+     * After lauching the app for the first time, this IS_FIRST_TIME_LAUNCH is set to be true
+     * @param isFirstTime This is the boolean input. It is set to be false after opening the app for the
+     *                    first time after installing. This is responsible for showing tajmahal and
+     *                    other images on first opening of app.
+     */
     public void setFirstTimeLaunch(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
         editor.commit();
     }
 
+    /**
+     * This function is called when app is opened from the second time.
+     * @return This is a boolean value telling that this app is not being opened for the first time.
+     * It was already set to false when we opende the app for the first time.
+     */
     public boolean isFirstTimeLaunch() {
         return preferences.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }

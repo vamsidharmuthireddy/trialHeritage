@@ -34,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_splash);
+        //This is the activity that is seen when app is initialised
 
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
@@ -47,11 +48,13 @@ public class SplashActivity extends AppCompatActivity {
                     sleep(SLEEP * 1000);
 
                     if (!launchPreferenceManager.isFirstTimeLaunch()) {
+                        //From second time whenever this app is opened, this activity is shown
                         Intent intent_packages_list = new Intent(SplashActivity.this, PackagesListActivity.class);
                         intent_packages_list.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent_packages_list);
                         finish();
                     } else {
+                        //This activity is only shown when opened for the first time after installing
                         launchPreferenceManager.setFirstTimeLaunch(false);
                         Intent intent_splash_intro = new Intent(SplashActivity.this, SplashIntroActivity.class);
                         intent_splash_intro.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
