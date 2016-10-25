@@ -21,7 +21,7 @@ public class LaunchPreferenceManager {
     }
 
     /**
-     * After lauching the app for the first time, this IS_FIRST_TIME_LAUNCH is set to be true
+     * After launching the app for the first time, this IS_FIRST_TIME_LAUNCH is set to be true
      * @param isFirstTime This is the boolean input. It is set to be false after opening the app for the
      *                    first time after installing. This is responsible for showing tajmahal and
      *                    other images on first opening of app.
