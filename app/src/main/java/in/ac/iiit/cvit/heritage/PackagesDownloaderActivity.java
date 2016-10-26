@@ -14,7 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class PackagesDownloaderActivity extends AppCompatActivity {
-
+    /**
+     * This class displays the packages available for download. Upon click, downloads the relevant package
+     */
     private ListView listview_available_packages;
 
     private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 3;

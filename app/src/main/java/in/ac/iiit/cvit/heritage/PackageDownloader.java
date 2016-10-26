@@ -24,7 +24,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class PackageDownloader extends AsyncTask<String, String, String> {
-
+    /**
+     * This class is used to download the package from particular website as a compressed file
+     * and extract it
+     */
     private URL url;
     private Context _context;
     private ProgressDialog progressDialog;

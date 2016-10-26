@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class PackagesListActivity extends AppCompatActivity {
-
+    /**
+     * This class shows the list of all the heritage site packages
+     */
     private Toolbar toolbar;
     private Button button_download_packages;
     private ListView listview_package_list;
@@ -30,6 +31,7 @@ public class PackagesListActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.my_heritage_sites);
         setSupportActionBar(toolbar);
 
+        //When Download packages button is pressed, show the list of packages available for download
         button_download_packages = (Button) findViewById(R.id.button_download_packages);
         button_download_packages.setText(R.string.download_packages);
         button_download_packages.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +42,7 @@ public class PackagesListActivity extends AppCompatActivity {
             }
         });
 
-        //temporary hard coding
+        //Setting the packages to be displayed to the user
         String[] packages = {"Golconda", "Hampi"};
         listview_package_list = (ListView) findViewById(R.id.listview_package_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesListActivity.this, android.R.layout.simple_list_item_1, packages);
@@ -51,11 +53,12 @@ public class PackagesListActivity extends AppCompatActivity {
                 TextView textView = (TextView) view;
                 String packageName = (String) textView.getText();
                 sessionManager.setSessionPreferences(PackagesListActivity.this, "package_name", packageName);
-
+                
                 Intent intent_main_activity = new Intent(PackagesListActivity.this, MainActivity.class);
                 intent_main_activity.putExtra("package", packageName);
                 startActivity(intent_main_activity);
             }
+
         });
     }
 }
