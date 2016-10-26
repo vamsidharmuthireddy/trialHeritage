@@ -28,7 +28,7 @@ public class SplashIntroFragment extends Fragment {
     }
 
     /**
-     *
+     *This method sets the image on the fragment
      * @param inflater
      * @param container
      * @param savedInstanceState
