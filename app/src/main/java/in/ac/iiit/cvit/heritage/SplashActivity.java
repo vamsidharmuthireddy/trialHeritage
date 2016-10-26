@@ -41,11 +41,13 @@ public class SplashActivity extends AppCompatActivity {
 
         launchPreferenceManager = new LaunchPreferenceManager(SplashActivity.this);
 
+        //creating a thread
         Thread background = new Thread() {
             @Override
             public void run() {
                 try {
-                    sleep(SLEEP * 1000);
+                    sleep(SLEEP * 1000);    //This is supposed to display start screen for 5 seconds. Look at Handler's postDelayed
+
 
                     if (!launchPreferenceManager.isFirstTimeLaunch()) {
                         //From second time whenever this app is opened, this activity is shown
@@ -66,6 +68,8 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         };
+
+        //starting the created thread
         background.start();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

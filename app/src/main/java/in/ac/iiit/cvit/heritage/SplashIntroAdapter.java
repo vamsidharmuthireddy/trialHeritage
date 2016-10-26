@@ -6,7 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class SplashIntroAdapter extends FragmentPagerAdapter {
-
+    /**
+     * This class gives back the page adapter to viewPager
+     * @param fragmentManager It receives SplashIntroFragment
+     */
     public SplashIntroAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }

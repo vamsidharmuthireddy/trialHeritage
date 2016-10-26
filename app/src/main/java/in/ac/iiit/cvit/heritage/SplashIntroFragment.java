@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SplashIntroFragment extends Fragment {
-
+    /**
+     * This class supplies images to the fragment_splash_intro when app is opened for the first time
+     */
     private int pageNumber;
     private TextView textView;
     private ImageView imageView;
@@ -25,6 +27,13 @@ public class SplashIntroFragment extends Fragment {
         pageNumber = bundle.getInt("page_number");
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view of this fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = getActivity().getLayoutInflater().inflate(R.layout.fragment_splash_intro, container, false);

@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SplashIntroActivity extends AppCompatActivity {
-
+    /**
+     * This class is the one showing taj mahal and others as intro activity when app is first opened
+     */
     private Button button_next;
     private Button button_skip;
     private ViewPager viewPager;
@@ -35,7 +37,7 @@ public class SplashIntroActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_splash);
         splashIntroAdapter = new SplashIntroAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(splashIntroAdapter);
+        viewPager.setAdapter(splashIntroAdapter);   //find out more about this line
 
         button_next =(Button) findViewById (R.id.button_next);
         button_skip =(Button) findViewById (R.id.button_skip);
@@ -43,6 +45,7 @@ public class SplashIntroActivity extends AppCompatActivity {
 
         addNavigationIndicators(0);
 
+        //gets activated when SKIP button is clicked on the screen
         button_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +53,7 @@ public class SplashIntroActivity extends AppCompatActivity {
             }
         });
 
+        //gets activated when NEXT button is clicked on the screen
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,10 +75,13 @@ public class SplashIntroActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 addNavigationIndicators(position);
+                //When on third page display only "GOT IT".
                 if (position == 2) {
                     button_next.setText(R.string.got_it);
                     button_skip.setVisibility(View.GONE);
-                } else {
+                }
+                //When on first and second pages, display "SKIP" and "NEXT"
+                else {
                     button_next.setText(R.string.next);
                     button_skip.setVisibility(View.VISIBLE);
                 }
@@ -87,6 +94,9 @@ public class SplashIntroActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This function shows the list of Heritage site packages available
+     */
     private void launchPackagesListScreen() {
         Intent intent_packages_list = new Intent(SplashIntroActivity.this, PackagesListActivity.class);
         intent_packages_list.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -94,6 +104,10 @@ public class SplashIntroActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     *  This function sets three dots at the bottom of the screen
+     * @param current_page It takes the values of 0,1,2. This the number of the page that user is viewing
+     */
     private void addNavigationIndicators(int current_page) {
         navigation_indicators = new TextView[3];
         linearLayout.removeAllViews();
