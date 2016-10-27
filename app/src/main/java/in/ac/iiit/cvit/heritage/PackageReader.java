@@ -44,7 +44,7 @@ public class PackageReader {
 
     /**
      * This is the method which is accessible from outside
-     * @return List of interest points
+     * @return List of interest points which are already calculated when this object is initialised
      */
     public ArrayList<InterestPoint> getContents(){
         return InterestPoints;
@@ -53,7 +53,7 @@ public class PackageReader {
     /**
      * This method is called from readFromFile
      * This method extracts information from xml file according to their tags in xml file
-     * This method calls another method InterestPoint to set the interest points
+     * This method calls InterestPoint object to set the interest points
      * It stores obtained interest points in InterestPoint array
      * @param xml It is the string containing all the data from the d.xml file
      */

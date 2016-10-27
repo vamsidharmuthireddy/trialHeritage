@@ -78,4 +78,6 @@ public class InterestPoint {
         return Math.sqrt(sum);
     }
 
+
+
 }

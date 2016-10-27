@@ -31,13 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOGTAG = "Heritage";
 
+    /**
+     * This method calls PagerAdapter object
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //setting the clicked heritage site as a new session
         sessionManager = new SessionManager();
         String packageName = sessionManager.getStringSessionPreferences(MainActivity.this, "package_name", "");
+
+        //getting data related to all the interest points available
         interestPoints = LoadPackage(packageName);
 
         //Setting the toolbar to display "Heritage"
