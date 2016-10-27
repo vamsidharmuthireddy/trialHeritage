@@ -1,26 +1,24 @@
 package in.ac.iiit.cvit.heritage;
 
-import android.*;
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    /**
+     *
+     */
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -42,16 +40,19 @@ public class MainActivity extends AppCompatActivity {
         String packageName = sessionManager.getStringSessionPreferences(MainActivity.this, "package_name", "");
         interestPoints = LoadPackage(packageName);
 
+        //Setting the toolbar to display "Heritage"
         toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
+        //Setting up three tabs "HOME", "NEARBY", "PLACES"
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.home));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.nearby));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.places));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        //linking viewpager with the tab layout
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
@@ -106,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method returns interest points of the chosen Heritage site by calling PackageReader class
+     * @param packageName It is the name of the site that user wants to see
+     * @return List of interest points in an InterestPoint array
+     */
     public ArrayList<InterestPoint> LoadPackage(String packageName){
         PackageReader reader;
         packageName = packageName.toLowerCase();

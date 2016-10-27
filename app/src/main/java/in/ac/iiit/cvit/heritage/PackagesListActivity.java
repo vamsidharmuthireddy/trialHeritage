@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 public class PackagesListActivity extends AppCompatActivity {
     /**
-     * This class shows the list of all the heritage site packages
+     * This class shows the list of all the heritage site packages.
+     * This class starts SessionManager class to set the session and opens MainActivity related to that session
      */
     private Toolbar toolbar;
     private Button button_download_packages;
@@ -51,6 +52,7 @@ public class PackagesListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView textView = (TextView) view;
+                //getting the name of the package which was clicked and setting the session
                 String packageName = (String) textView.getText();
                 sessionManager.setSessionPreferences(PackagesListActivity.this, "package_name", packageName);
                 

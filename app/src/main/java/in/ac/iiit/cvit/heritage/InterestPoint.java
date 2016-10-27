@@ -3,7 +3,6 @@ package in.ac.iiit.cvit.heritage;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,6 +19,11 @@ public class InterestPoint {
         details = new HashMap<String, String>();
     }
 
+    /**
+     * This method sets the interest point
+     * @param key It's the key for an attribute in xml file
+     * @param value It's the value assigned for a particular key in the xml file
+     */
     public void set(String key, String value) {
         details.put(key, value);
     }

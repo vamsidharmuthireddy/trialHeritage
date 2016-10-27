@@ -23,6 +23,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class PackageReader {
+    /**
+     * This method is called from ActivityMain
+     * This method gets all the interest points from the download package of particular site
+     *
+     */
+
 
     public String _packageName;
     InterestPoint interestPoint;
@@ -36,10 +42,21 @@ public class PackageReader {
         readFromFile();
     }
 
+    /**
+     * This is the method which is accessible from outside
+     * @return List of interest points
+     */
     public ArrayList<InterestPoint> getContents(){
         return InterestPoints;
     }
 
+    /**
+     * This method is called from readFromFile
+     * This method extracts information from xml file according to their tags in xml file
+     * This method calls another method InterestPoint to set the interest points
+     * It stores obtained interest points in InterestPoint array
+     * @param xml It is the string containing all the data from the d.xml file
+     */
     private void readContentsFromString(String xml){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
@@ -58,18 +75,30 @@ public class PackageReader {
             Document doc = null;
             try {
                 doc = builder.parse(xmlfile);
+
+                //get the first element
                 Element root = doc.getDocumentElement();
+
+                //get all the child elements
                 NodeList ips = root.getChildNodes();
+
                 for(int i=0; i<ips.getLength(); i++){
+
                     if(ips.item(i).getNodeType() == Node.ELEMENT_NODE){
+
+                        //We are creating an interest point object to store all the relevant data available
                         interestPoint = new InterestPoint();
+
+                        //getting a list of all the child elements
                         NodeList keys = ips.item(i).getChildNodes();
+
                         for(int j=0; j<keys.getLength(); j++){
                             if(keys.item(j).getNodeType() == Node.ELEMENT_NODE){
                                 Element key = (Element)keys.item(j);
                                 interestPoint.set(key.getNodeName(), key.getTextContent());
                             }
                         }
+                        //Here we are storing each InterestPoint object in an InterestPoint array
                         InterestPoints.add(interestPoint);
                     }
                 }
@@ -83,6 +112,10 @@ public class PackageReader {
         }
     }
 
+    /**
+     * This method is called when this class is initialised.
+     * It calls readTextFile and readContentsFromString to get the contents from heritage storage folder
+     */
     private void readFromFile(){
         File baseLocal = Environment.getExternalStorageDirectory();
 
@@ -96,7 +129,12 @@ public class PackageReader {
         }
     }
 
-
+    /**
+     * This function is called from readFromFile
+     *This class reads the entire d.xml file into a string. THis string is used as input to readContentsFromString
+     * @param inputStream It is an InputStream file containing location of the file to be read into string
+     * @return String containing the contents of the d.xml file
+     */
     private String readTextFile(InputStream inputStream) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
