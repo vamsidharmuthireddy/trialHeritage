@@ -8,18 +8,16 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 
-/**
- * Created by HOME on 28-10-2016. by vamsi
- */
-
-public class gettingViewAngle extends Activity implements SensorEventListener {
 
 
-    Float azimuth = (float) Math.PI/180;  // View to draw a compass
+public class ViewAngleActivity extends Activity implements SensorEventListener {
+
+
+    Float azimuth;  // View to draw a compass
     Float pitch;
     Float roll;
 
-    float oldAzimuth = (float) Math.PI/180;
+    float oldAzimuth;
 
     private SensorManager mSensorManager;
     Sensor accelerometer;
@@ -73,20 +71,17 @@ public class gettingViewAngle extends Activity implements SensorEventListener {
                 pitch = orientation[1];
                 roll = orientation[2];
 
-
                 // at this point, orientation contains the azimuth(direction), pitch and roll values.
-//                azimuth = (float) (180 * orientation[0] / Math.PI);
-//                pitch = (float)(180 * orientation[1] / Math.PI);
-//                roll = (float) (180 * orientation[2] / Math.PI);
 
                 Log.d("onSensorChanged:", "azimuth = "+ azimuth);
                 Log.d("onSensorChanged:", "oldAzimuth = "+ oldAzimuth);
             }
+
         }
     }
 
     /**
-     * This method calculates the azimuthal angle and line equation of the mobile's axis
+     * This method calculates line equation of mobile axis
      * @param currentLatitude
      * @param currentLongitude
      * @return co-efficients of the line a.x + b.y + c = 0
@@ -96,6 +91,8 @@ public class gettingViewAngle extends Activity implements SensorEventListener {
         double angle = 1;
         double a,b,c;
         double[] coEfficients = {1, 1, 0};
+        Log.d("setLine:", "azimuth = "+ azimuth);
+        Log.d("setLine:", "oldAzimuth = "+ oldAzimuth);
 
         if(azimuth!= null) {
             angle = (float) azimuth;

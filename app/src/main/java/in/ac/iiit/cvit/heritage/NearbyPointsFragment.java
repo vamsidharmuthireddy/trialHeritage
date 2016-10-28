@@ -44,6 +44,8 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
     private ArrayList<InterestPoint> sortedInterestPoints;
     private ArrayList<InterestPoint> interestPoints;
 
+    private ViewAngleActivity viewAngleActivity;
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
@@ -58,6 +60,8 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         _context = getActivity();
         mGoogleApiClient = null;
         createLocationClients();
+
+        viewAngleActivity = new ViewAngleActivity();
 
         interestPoints = ((MainActivity) this.getActivity()).interestPoints;
         sortedInterestPoints = new ArrayList<InterestPoint>();
@@ -250,7 +254,6 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         double distance;
         Pair<Double, Integer> P;
 
-        gettingViewAngle gettingViewAngle = new gettingViewAngle();
         ArrayList<Pair<Double, Integer>> angleIndices = new ArrayList<>();
         double angle;
         Pair<Double, Integer> angleP;
@@ -259,13 +262,15 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         for(int i=0; i<interestPoints.size(); i++){
             //getting the distance of all the interest points from the current location
             distance = interestPoints.get(i).distance(currentLatitude, currentLongitude);
-            Log.d(LOGTAG, "Distance = "+distance);
+ //           Log.d(LOGTAG, "Distance = "+distance);
             P = new Pair(distance, i);
             Indices.add(P);
 
-            //getting the angle of all the interest points from the current location line of view
-            angle = interestPoints.get(i).giveAngle(currentLatitude,currentLongitude);
-            Log.d(LOGTAG, "angle = "+ angle);
+            //getting the co-efficients of line of view
+            double[] coEfficients = viewAngleActivity.setLine(currentLatitude,currentLongitude);
+            //getting view angle of interest point from line of sight
+            angle = interestPoints.get(i).giveAngle(currentLatitude,currentLongitude,coEfficients);
+//            Log.d(LOGTAG, "angle = "+ angle);
             angleP = new Pair(angle, i);
             angleIndices.add(angleP);
         }
@@ -290,7 +295,7 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         //not needed?
         for(int i=0; i<interestPoints.size(); i++){
             distance = Indices.get(i).first;
-            Log.d(LOGTAG, "SDistance = "+distance);
+  //          Log.d(LOGTAG, "SDistance = "+distance);
             P = new Pair(distance, i);
             Indices.add(P);
         }
@@ -314,7 +319,7 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
 
             double tempAngle = angleIndices.get(key).first; //getting the angle of nearest interest point
 
-            Log.d(LOGTAG, "nearest Distance angles= "+tempAngle);
+//            Log.d(LOGTAG, "nearest Distance angles= "+tempAngle);
             Pair tempP = new Pair(tempAngle, key);
             finalAngleIndices.add(tempP);
         }
@@ -322,11 +327,33 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         //continue from here
         //sort the first three nearest distance points based on their view angles
 
-        /*Write your code here */
+        ArrayList<Pair<Double, Integer>> finalThreeAngleIndices = new ArrayList<>();
+        if (finalAngleIndices.size() != 0) {
+            finalThreeAngleIndices.add(new Pair(finalAngleIndices.get(0).first, finalAngleIndices.get(0).second));
+            finalThreeAngleIndices.add(new Pair(finalAngleIndices.get(1).first, finalAngleIndices.get(1).second));
+            finalThreeAngleIndices.add(new Pair(finalAngleIndices.get(2).first, finalAngleIndices.get(2).second));
 
+            Collections.sort(finalThreeAngleIndices, new Comparator<Pair<Double, Integer>>() {
+                @Override
+                public int compare(final Pair<Double, Integer> left, final Pair<Double, Integer> right) {
+                    if (left.first < right.first) {
+                        return -1;
+                    } else if (left.first == right.first) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+
+
+            Log.d(LOGTAG, "angle1 = "+finalThreeAngleIndices.get(0).first);
+            Log.d(LOGTAG, "angle2 = "+finalThreeAngleIndices.get(1).first);
+            Log.d(LOGTAG, "angle3 = "+finalThreeAngleIndices.get(2).first);
+        }
         //setting the order of three points based on the view angles of the nearest points
         for (int i=0; i<Math.min(TRUNCATION_LIMIT, interestPoints.size()); i++) {
-            interestPoint = interestPoints.get(finalAngleIndices.get(i).second);
+            interestPoint = interestPoints.get(finalThreeAngleIndices.get(i).second);
             sortedInterestPoints.set(i, interestPoint);
         }
 

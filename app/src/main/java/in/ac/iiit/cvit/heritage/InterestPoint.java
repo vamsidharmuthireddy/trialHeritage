@@ -3,7 +3,6 @@ package in.ac.iiit.cvit.heritage;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,10 +73,10 @@ public class InterestPoint {
         pLat = Double.parseDouble(details.get("lat"));
         pLong = Double.parseDouble(details.get("long"));
 
-        Log.d("InterestPoint:distance", "pLat="+ pLat);
-        Log.d("InterestPoint:distance", "pLong="+ pLong);
+//        Log.d("InterestPoint:distance", "pLat="+ pLat);
+//        Log.d("InterestPoint:distance", "pLong="+ pLong);
 
-        /* Eucleadean distance. Should work. */
+        /* Euclidean distance. Should work. */
         dLat = pLat - iLat;
         dLong = pLong - iLong;
         sum = dLat * dLat + dLong * dLong;
@@ -92,34 +91,32 @@ public class InterestPoint {
      * based on user's current location and mobile's direction
      * @param iLat latitude
      * @param iLong longitude
-     * @return
+     * @return view angle from mobile's direction od axis
      */
-     double giveAngle(double iLat, double iLong){
+     double giveAngle(double iLat, double iLong, double[] coEfficients){
 
          double pLat;
          double pLong;
          double angle = 0;
          double perpDist = 0;
 
-         gettingViewAngle gettingViewAngle = new gettingViewAngle();
 
-         double[] coEfficients = gettingViewAngle.setLine(iLat,iLong);
 
          double a = coEfficients[0];
          double b = coEfficients[1];
          double c = coEfficients[2];
 
-         Log.d("giveAngle", "a="+ a);
-         Log.d("giveAngle", "b="+ b);
-         Log.d("giveAngle", "c="+ c);
+//         Log.d("giveAngle", "a="+ a);
+//         Log.d("giveAngle", "b="+ b);
+//         Log.d("giveAngle", "c="+ c);
 
          pLat = Double.parseDouble(details.get("lat"));
          pLong = Double.parseDouble(details.get("long"));
-         Log.d("InterestPoint:distance", "pLat="+ pLat);
-         Log.d("InterestPoint:distance", "pLong="+ pLong);
+ //        Log.d("InterestPoint:distance", "pLat="+ pLat);
+ //        Log.d("InterestPoint:distance", "pLong="+ pLong);
 
          perpDist = (a*pLat + b*pLong +c ) / (Math.sqrt((Math.pow(a,2)+Math.pow(b,2))));
-         Log.d("giveAngle:perpDist", "perpDist="+ perpDist);
+//         Log.d("giveAngle:perpDist", "perpDist="+ perpDist);
 
          angle = Math.asin(perpDist/betweenDistance);
 
