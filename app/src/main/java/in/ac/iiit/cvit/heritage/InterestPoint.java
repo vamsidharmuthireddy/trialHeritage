@@ -3,6 +3,7 @@ package in.ac.iiit.cvit.heritage;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -63,6 +64,8 @@ public class InterestPoint {
         return image_bitmaps;
     }
 
+    private double betweenDistance;
+
     double distance(double iLat, double iLong){
         double pLat, pLong;
         double dLat, dLong;
@@ -71,13 +74,56 @@ public class InterestPoint {
         pLat = Double.parseDouble(details.get("lat"));
         pLong = Double.parseDouble(details.get("long"));
 
+        Log.d("InterestPoint:distance", "pLat="+ pLat);
+        Log.d("InterestPoint:distance", "pLong="+ pLong);
+
         /* Eucleadean distance. Should work. */
         dLat = pLat - iLat;
         dLong = pLong - iLong;
         sum = dLat * dLat + dLong * dLong;
+
+        betweenDistance = Math.sqrt(sum);
+
         return Math.sqrt(sum);
     }
 
+    /**
+     * This method is called from NearbyPointsFragment. This method gives the view angle of the interest point
+     * based on user's current location and mobile's direction
+     * @param iLat latitude
+     * @param iLong longitude
+     * @return
+     */
+     double giveAngle(double iLat, double iLong){
 
+         double pLat;
+         double pLong;
+         double angle = 0;
+         double perpDist = 0;
+
+         gettingViewAngle gettingViewAngle = new gettingViewAngle();
+
+         double[] coEfficients = gettingViewAngle.setLine(iLat,iLong);
+
+         double a = coEfficients[0];
+         double b = coEfficients[1];
+         double c = coEfficients[2];
+
+         Log.d("giveAngle", "a="+ a);
+         Log.d("giveAngle", "b="+ b);
+         Log.d("giveAngle", "c="+ c);
+
+         pLat = Double.parseDouble(details.get("lat"));
+         pLong = Double.parseDouble(details.get("long"));
+         Log.d("InterestPoint:distance", "pLat="+ pLat);
+         Log.d("InterestPoint:distance", "pLong="+ pLong);
+
+         perpDist = (a*pLat + b*pLong +c ) / (Math.sqrt((Math.pow(a,2)+Math.pow(b,2))));
+         Log.d("giveAngle:perpDist", "perpDist="+ perpDist);
+
+         angle = Math.asin(perpDist/betweenDistance);
+
+         return angle;
+    }
 
 }

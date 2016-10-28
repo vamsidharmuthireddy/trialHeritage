@@ -249,13 +249,28 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         ArrayList<Pair<Double, Integer>> Indices = new ArrayList<>();
         double distance;
         Pair<Double, Integer> P;
+
+        gettingViewAngle gettingViewAngle = new gettingViewAngle();
+        ArrayList<Pair<Double, Integer>> angleIndices = new ArrayList<>();
+        double angle;
+        Pair<Double, Integer> angleP;
+
+
         for(int i=0; i<interestPoints.size(); i++){
+            //getting the distance of all the interest points from the current location
             distance = interestPoints.get(i).distance(currentLatitude, currentLongitude);
             Log.d(LOGTAG, "Distance = "+distance);
             P = new Pair(distance, i);
             Indices.add(P);
+
+            //getting the angle of all the interest points from the current location line of view
+            angle = interestPoints.get(i).giveAngle(currentLatitude,currentLongitude);
+            Log.d(LOGTAG, "angle = "+ angle);
+            angleP = new Pair(angle, i);
+            angleIndices.add(angleP);
         }
 
+        //Arranging the distances in their ascending order
         Collections.sort(Indices, new Comparator<Pair<Double, Integer>>() {
             @Override
             public int compare(final Pair<Double, Integer> left, final Pair<Double, Integer> right) {
@@ -271,6 +286,8 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
             }
         });
 
+        //just adding the sorted list to the main list with new indices
+        //not needed?
         for(int i=0; i<interestPoints.size(); i++){
             distance = Indices.get(i).first;
             Log.d(LOGTAG, "SDistance = "+distance);
@@ -278,10 +295,40 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
             Indices.add(P);
         }
 
+        //setting the order of interest points
         InterestPoint interestPoint;
         for (int i=0; i<Math.min(TRUNCATION_LIMIT, interestPoints.size()); i++) {
             interestPoint = interestPoints.get(Indices.get(i).second);
             sortedInterestPoints.set(i, interestPoint);
         }
+
+        /**
+         * Edited by vamsi
+         */
+        ArrayList<Pair<Double, Integer>> finalAngleIndices = new ArrayList<>();
+        //setting the angle in the ascending order of distances
+        //arranging the angles in the order of distances
+        for(int i=0; i<interestPoints.size(); i++){
+
+            int key = Indices.get(i).second;    //getting the nearest interest point number
+
+            double tempAngle = angleIndices.get(key).first; //getting the angle of nearest interest point
+
+            Log.d(LOGTAG, "nearest Distance angles= "+tempAngle);
+            Pair tempP = new Pair(tempAngle, key);
+            finalAngleIndices.add(tempP);
+        }
+
+        //continue from here
+        //sort the first three nearest distance points based on their view angles
+
+        /*Write your code here */
+
+        //setting the order of three points based on the view angles of the nearest points
+        for (int i=0; i<Math.min(TRUNCATION_LIMIT, interestPoints.size()); i++) {
+            interestPoint = interestPoints.get(finalAngleIndices.get(i).second);
+            sortedInterestPoints.set(i, interestPoint);
+        }
+
     }
 }
