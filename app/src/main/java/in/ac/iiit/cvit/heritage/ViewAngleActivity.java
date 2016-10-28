@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 
-
 public class ViewAngleActivity extends Activity implements SensorEventListener {
 
-
+    private static final String LOG_TAG = "ViewAngleActivity:";
     Float azimuth;  // View to draw a compass
     Float pitch;
     Float roll;
@@ -23,31 +22,40 @@ public class ViewAngleActivity extends Activity implements SensorEventListener {
     Sensor accelerometer;
     Sensor magnetometer;
 
+    public ViewAngleActivity(){
+        Log.d(LOG_TAG,"Constructor got created");
 
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        Log.d("gettingViewAngle:","in onCreateSensor got Created");
+        Log.d(LOG_TAG,"onCreate got created");
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
         mSensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_UI);
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
 
+    @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {  }
 
     float[] mGravity;
     float[] mGeomagnetic;
 
+    @Override
     public void onSensorChanged(SensorEvent event) {
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)

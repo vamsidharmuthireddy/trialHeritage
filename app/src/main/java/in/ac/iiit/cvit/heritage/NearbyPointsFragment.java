@@ -62,6 +62,7 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         createLocationClients();
 
         viewAngleActivity = new ViewAngleActivity();
+        Log.v("Nearby:onCreate", "viewAngleObject got created");
 
         interestPoints = ((MainActivity) this.getActivity()).interestPoints;
         sortedInterestPoints = new ArrayList<InterestPoint>();
