@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -30,8 +34,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static android.content.Context.SENSOR_SERVICE;
 
-public class NearbyPointsFragment extends Fragment implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener{
+
+public class NearbyPointsFragment extends Fragment implements SensorEventListener,ConnectionCallbacks, OnConnectionFailedListener, LocationListener{
 
     private static final String LOGTAG = "Heritage:Nearby";
     //Define a request code to send to Google Play services
@@ -44,7 +50,6 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
     private ArrayList<InterestPoint> sortedInterestPoints;
     private ArrayList<InterestPoint> interestPoints;
 
-    private ViewAngleActivity viewAngleActivity;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
@@ -54,6 +59,18 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
 
     private static final int TRUNCATION_LIMIT = 3;
 
+    Float azimuth = (float)0;
+    Float pitch = (float)0;
+    Float roll = (float)0;
+
+    float oldAzimuth = (float)0;
+
+    private SensorManager mSensorManager;
+    Sensor accelerometer;
+    Sensor magnetometer;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_nearby_points, container, false);
@@ -61,8 +78,10 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         mGoogleApiClient = null;
         createLocationClients();
 
-        viewAngleActivity = new ViewAngleActivity();
-        Log.v("Nearby:onCreate", "viewAngleObject got created");
+        mSensorManager = (SensorManager)_context.getSystemService(SENSOR_SERVICE);
+        accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        Log.d(LOGTAG,"sensors in onCreate got created");
 
         interestPoints = ((MainActivity) this.getActivity()).interestPoints;
         sortedInterestPoints = new ArrayList<InterestPoint>();
@@ -115,6 +134,8 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
     @Override
     public void onResume() {
         super.onResume();
+        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_UI);
         //Now lets connect to the API
         mGoogleApiClient.connect();
     }
@@ -122,6 +143,7 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
     @Override
     public void onPause() {
         super.onPause();
+        mSensorManager.unregisterListener(this);
         Log.v(this.getClass().getSimpleName(), "onPause()");
 
 
@@ -131,6 +153,9 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
             mGoogleApiClient.disconnect();
         }
     }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {  }
 
     @Override
     public void onConnectionSuspended(int i) {}
@@ -250,6 +275,59 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
 
     }
 
+
+    float[] mGravity;
+    float[] mGeomagnetic;
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+            mGravity = event.values;
+
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+            mGeomagnetic = event.values;
+
+        if (mGravity != null && mGeomagnetic != null) {
+            float R[] = new float[9];
+            float I[] = new float[9];
+
+            if (SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic)) {
+
+                // orientation contains azimuth, pitch and roll
+                float orientation[] = new float[3];
+                SensorManager.getOrientation(R, orientation);
+
+
+                oldAzimuth = azimuth;
+                azimuth = orientation[0];
+                pitch = orientation[1];
+                roll = orientation[2];
+
+                if(azimuth < 0){
+                    azimuth = azimuth + (float)Math.PI;
+                }
+
+                if(roll < 0){
+                    roll = roll + (float)Math.PI;
+                }
+                if(pitch < 0){
+                    pitch = pitch + (float)Math.PI;
+                }
+
+                Log.d(LOGTAG,"calling computeNearby");
+                computeNearby(currentLatitude, currentLongitude);
+                refreshRecyclerView();
+
+ //               Log.d("onSensorChanged:", "azimuth = "+ azimuth);
+   //             Log.d("onSensorChanged:", "oldAzimuth = "+ oldAzimuth);
+            }
+
+        }
+    }
+
+
+
     public void computeNearby(Double currentLatitude, Double currentLongitude) {
         ArrayList<Pair<Double, Integer>> Indices = new ArrayList<>();
         double distance;
@@ -268,7 +346,7 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
             Indices.add(P);
 
             //getting the co-efficients of line of view
-            double[] coEfficients = viewAngleActivity.setLine(currentLatitude,currentLongitude);
+            double[] coEfficients = setLine(currentLatitude,currentLongitude);
             //getting view angle of interest point from line of sight
             angle = interestPoints.get(i).giveAngle(currentLatitude,currentLongitude,coEfficients);
 //            Log.d(LOGTAG, "angle = "+ angle);
@@ -348,9 +426,9 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
             });
 
 
-            Log.d(LOGTAG, "angle1 = "+finalThreeAngleIndices.get(0).first);
-            Log.d(LOGTAG, "angle2 = "+finalThreeAngleIndices.get(1).first);
-            Log.d(LOGTAG, "angle3 = "+finalThreeAngleIndices.get(2).first);
+            Log.d(LOGTAG, "angle1 = "+finalThreeAngleIndices.get(0).first * 180/Math.PI);
+            Log.d(LOGTAG, "angle2 = "+finalThreeAngleIndices.get(1).first * 180/Math.PI);
+            Log.d(LOGTAG, "angle3 = "+finalThreeAngleIndices.get(2).first * 180/Math.PI);
         }
         //setting the order of three points based on the view angles of the nearest points
         for (int i=0; i<Math.min(TRUNCATION_LIMIT, interestPoints.size()); i++) {
@@ -359,4 +437,72 @@ public class NearbyPointsFragment extends Fragment implements ConnectionCallback
         }
 
     }
+
+
+    /**
+     * This method calculates line equation of mobile axis
+     * @param currentLatitude
+     * @param currentLongitude
+     * @return co-efficients of the line a.x + b.y + c = 0
+     */
+    public double[] setLine(Double currentLatitude, Double currentLongitude){
+
+        double angle = 1;
+        double a,b,c;
+        double[] coEfficients = {1, 1, 0};
+ //       Log.d("setLine:", "azimuth = "+ azimuth);
+ //       Log.d("setLine:", "oldAzimuth = "+ oldAzimuth);
+
+        if(azimuth!= null) {
+            angle = (float) azimuth;
+            if (angle == 0){
+                angle = Math.PI/180;
+            }
+            if ( angle%((Math.PI)/2) ==0){
+                a = 0;
+                b = 1;
+                c = ( - currentLongitude);
+            }
+            else {
+                a = -(Math.tan((double) angle));
+                b = 1;
+                c = (Math.tan((double) angle) * currentLatitude) - currentLongitude;
+            }
+//            Log.d("setLine:Using azimuth", "azimuth = "+ angle);
+
+            coEfficients[0] = a ;
+            coEfficients[1] = b ;
+            coEfficients[2] = c ;
+
+        }
+        else{
+            angle = (float) oldAzimuth;
+            if (angle == 0){
+                angle = Math.PI/180;
+            }
+
+            if ( angle%((Math.PI)/2) ==0){
+                a = 0;
+                b = 1;
+                c = ( - currentLongitude);
+            }
+            else {
+                a = -(Math.tan((double) angle));
+                b = 1;
+                c = (Math.tan((double) angle) * currentLatitude) - currentLongitude;
+            }
+//            Log.d("setLine:UsingOldAzimuth", "oldAzimuth = "+ angle);
+
+            coEfficients[0] = a ;
+            coEfficients[1] = b ;
+            coEfficients[2] = c ;
+        }
+
+
+
+        return coEfficients;
+    }
+
+
+
 }
