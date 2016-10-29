@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     /**
+     *View Pager, Tab layout, number of Tabs are  setup here
+     * All the interest points and their relevant content are loaded into an InterestPoint array from PackageReader
      *
      */
     private Toolbar toolbar;
