@@ -10,7 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class NearbyPointsRecyclerViewAdapter extends RecyclerView.Adapter<NearbyPointsRecyclerViewAdapter.DataObjectHolder> {
-
+    /**
+     * This class is called from NearbyPointsFragment after we get nearby interest points
+     * This class sets the picture and text(Title) on the NearbyPointsFragment's recycler view
+     */
     private ArrayList<InterestPoint> interestPoints;
     private static final String LOGTAG = "Heritage";
 
@@ -26,6 +29,10 @@ public class NearbyPointsRecyclerViewAdapter extends RecyclerView.Adapter<Nearby
         }
     }
 
+    /**
+     * This method has the sortedInterestPoints obtained from NearbyPointsFragment
+     * @param interestPoints contains the sorted list of three nearest interest points
+     */
     public NearbyPointsRecyclerViewAdapter(ArrayList<InterestPoint> interestPoints) {
         this.interestPoints = interestPoints;
         notifyDataSetChanged();

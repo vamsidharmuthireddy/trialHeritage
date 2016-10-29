@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         String packageName = sessionManager.getStringSessionPreferences(MainActivity.this, "package_name", "");
 
         //getting data related to all the interest points available
+        //The above interestPoints has the data on all available interest points
         interestPoints = LoadPackage(packageName);
 
         //Setting the toolbar to display "Heritage"
@@ -118,13 +119,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method returns interest points of the chosen Heritage site by calling PackageReader class
      * @param packageName It is the name of the site that user wants to see
-     * @return List of interest points in an InterestPoint array
+     * @return List of all the interest points along with their contents in an InterestPoint array
      */
     public ArrayList<InterestPoint> LoadPackage(String packageName){
         PackageReader reader;
         packageName = packageName.toLowerCase();
         reader = new PackageReader(packageName);
+        //This reader has all the information about all the interest points
+        //We are getting an array of InterestPoint objects
         ArrayList<InterestPoint> interestPoints = reader.getContents();
+        //The above interestPoints has the data on all available interest points
         return interestPoints;
     }
 

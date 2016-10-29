@@ -1,13 +1,11 @@
 package in.ac.iiit.cvit.heritage;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +14,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class InterestPointActivity extends AppCompatActivity {
-
+    /**
+     * When an interest point is clicked, this class is called.
+     * It sets the data on the interest point activity
+     */
     private Toolbar toolbar;
     private ImageView imageView;
     private TextView textview_info;
@@ -38,6 +39,7 @@ public class InterestPointActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest_point);
 
+        //we are getting the name of the session(Heritage site that user initially clicked to see)
         sessionManager = new SessionManager();
         final String packageName = sessionManager.getStringSessionPreferences(InterestPointActivity.this, "package_name", "");
 
@@ -94,6 +96,12 @@ public class InterestPointActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This method checks for the clicked interest point by it's name in the database
+     * @param packageName Name of the Heritage site that usr chooses initially
+     * @param interestPointName Clicked interest point name
+     * @return  clicked InterestPoint object
+     */
     public InterestPoint LoadInterestPoint(String packageName, String interestPointName) {
         PackageReader reader;
         packageName = packageName.toLowerCase();

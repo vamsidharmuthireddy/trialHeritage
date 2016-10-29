@@ -44,7 +44,7 @@ public class PackageReader {
 
     /**
      * This is the method which is accessible from outside
-     * @return List of interest points which are already calculated when this object is initialised
+     * @return Array list of all the InterestPoint which are already calculated when this object is initialised
      */
     public ArrayList<InterestPoint> getContents(){
         return InterestPoints;
@@ -95,10 +95,12 @@ public class PackageReader {
                         for(int j=0; j<keys.getLength(); j++){
                             if(keys.item(j).getNodeType() == Node.ELEMENT_NODE){
                                 Element key = (Element)keys.item(j);
+                                ///This interest point contains all the data relevent to particular interest point
                                 interestPoint.set(key.getNodeName(), key.getTextContent());
                             }
                         }
                         //Here we are storing each InterestPoint object in an InterestPoint array
+                        //So InterestPoints has all the information on all the interest points available for a heritage site
                         InterestPoints.add(interestPoint);
                     }
                 }

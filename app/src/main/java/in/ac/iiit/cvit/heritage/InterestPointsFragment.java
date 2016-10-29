@@ -14,7 +14,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class InterestPointsFragment extends Fragment {
-
+    /**
+     * This class relates to the PLACES tab on the UI
+     * It displays all the interest points available
+     */
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
@@ -32,6 +35,7 @@ public class InterestPointsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerViewLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
+        //setting the view of the PLACES tab
         recyclerViewAdapter = new InterestPointsRecyclerViewAdapter(interestPoints);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

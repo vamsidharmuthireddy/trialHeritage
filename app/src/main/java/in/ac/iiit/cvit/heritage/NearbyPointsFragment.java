@@ -38,6 +38,12 @@ import static android.content.Context.SENSOR_SERVICE;
 
 
 public class NearbyPointsFragment extends Fragment implements SensorEventListener,ConnectionCallbacks, OnConnectionFailedListener, LocationListener{
+    /**
+     * This class gives back the three nearest interest points and uses PageAdapter class to set them on screen
+     * computeNearby() is called whenever location data or sensor data is changed
+     * From onCreateView only refreshRecyclerView() is called
+     */
+
 
     private static final String LOGTAG = "Heritage:Nearby";
     //Define a request code to send to Google Play services
@@ -83,12 +89,17 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
         magnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         Log.d(LOGTAG,"sensors in onCreate got created");
 
+        //can we try the below code?
+ //       interestPoints = MainActivity.interestPoints;
+        //getting the InterestPoint object set in MainActivity
         interestPoints = ((MainActivity) this.getActivity()).interestPoints;
+        //initializing the array
         sortedInterestPoints = new ArrayList<InterestPoint>();
         for(int i=0; i<Math.min(TRUNCATION_LIMIT, interestPoints.size()); i++){
             sortedInterestPoints.add(interestPoints.get(i));
         }
 
+        //Initializing the recyclerView and calling the refreshRecyclerView
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerview_nearby_points);
         recyclerView.setHasFixedSize(true);
         recyclerViewLayoutManager = new LinearLayoutManager(getActivity());
@@ -99,6 +110,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
     }
 
     private void refreshRecyclerView() {
+
         recyclerViewAdapter = new NearbyPointsRecyclerViewAdapter(sortedInterestPoints);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -108,10 +120,12 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
                 @Override
                 public void onItemClick(View view, int position) {
                     RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForLayoutPosition(position);
+                    //getting the title of the clicked interest point
                     TextView textView = (TextView) viewHolder.itemView.findViewById(R.id.cardview_text);
                     String text = textView.getText().toString();
 
                     Intent intent_interest_point = new Intent(getActivity(), InterestPointActivity.class);
+                    //passing the title of the clicked interest point to InterestPintActivity
                     intent_interest_point.putExtra("interest_point", text);
                     startActivity(intent_interest_point);
                 }
@@ -265,6 +279,10 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
         }
     }
 
+    /**
+     * We call computeNearby method from here which calculates nearby interest points based on gps
+     * @param location
+     */
     @Override
     public void onLocationChanged(Location location) {
         currentLatitude = location.getLatitude();
@@ -312,7 +330,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
                     roll = roll + (float)Math.PI;
                 }
                 if(pitch < 0){
-                    pitch = pitch + (float)Math.PI;
+                    pitch = pitch + (float)Math.PI/2;
                 }
 
                 Log.d(LOGTAG,"calling computeNearby");

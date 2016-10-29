@@ -10,7 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class InterestPointsRecyclerViewAdapter extends RecyclerView.Adapter<InterestPointsRecyclerViewAdapter.DataObjectHolder> {
-
+    /**
+     * This class is called from InterestPointsFragment after we get all the interest points
+     * This class sets the picture and text(Title) on the InterestPointsFragment's recycler view
+     */
     private ArrayList<InterestPoint> interestPoints;
     private static final String LOGTAG = "Heritage";
 
