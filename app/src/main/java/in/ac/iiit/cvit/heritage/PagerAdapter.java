@@ -3,10 +3,11 @@ package in.ac.iiit.cvit.heritage;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-
+    /**
+     * Need to figure out more about this class
+     */
     private int _tabCount;
 
     public PagerAdapter(FragmentManager fragmentManager, int tabCount) {
