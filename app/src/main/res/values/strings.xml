@@ -12,6 +12,16 @@
     <string name="powered_by">Powered By</string>
     <string name="settings">Settings</string>
     <string name="about_us">About Us</string>
+
+    <string name="instructions">Instructions</string>
+    <string name="general_instructions">General Instructions</string>
+    <string name="nearby_instructions">This tab shows the list of three monuments/sites that are nearest to you.</string>
+    <string name="places_instructions">This tab shows the list of all the important monuments and sites that you have to see at the heritage site that you are in. To see more information about a particular listed monument or a site, you can click on it</string>
+    <string name="home_instructions">In the HOME tab, you can see the information about the heritage site that you have selected.</string>
+    <string name="selecting_package">After you are done downloading the package, press back button and select the name of the package from the list of available packages. In the next screen you can see three tabs.</string>
+    <string name="downloading_package">When you open the app, you see a list of packages available for you. You can access them once you download them using Download Package button and selecting the required package.</string>
+
+
     <string name="images">Images</string>
     <string name="videos">Videos</string>
     <string name="audio">Audio</string>

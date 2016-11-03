@@ -53,6 +53,10 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity android:name=".InstructionsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity android:name=".AboutUsActivity"
             android:screenOrientation="fullSensor">
         </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for

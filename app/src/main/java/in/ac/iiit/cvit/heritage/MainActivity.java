@@ -111,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_about_us = new Intent(MainActivity.this, AboutUsActivity.class);
                 startActivity(intent_about_us);
                 break;
+            case R.id.action_instructions:
+                Intent intent_instructions = new Intent(MainActivity.this, InstructionsActivity.class);
+                startActivity(intent_instructions);
+                break;
             default:
                 break;
         }
