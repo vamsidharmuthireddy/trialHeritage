@@ -49,7 +49,7 @@ public class SplashIntroActivity extends AppCompatActivity {
         button_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchPackagesListScreen();
+                launchInformationScreen();
             }
         });
 
@@ -61,7 +61,7 @@ public class SplashIntroActivity extends AppCompatActivity {
                 if (current_item < 3) {
                     viewPager.setCurrentItem(current_item);
                 } else {
-                    launchPackagesListScreen();
+                    launchInformationScreen();
                 }
             }
         });
@@ -97,10 +97,11 @@ public class SplashIntroActivity extends AppCompatActivity {
     /**
      * This function shows the list of Heritage site packages available
      */
-    private void launchPackagesListScreen() {
-        Intent intent_packages_list = new Intent(SplashIntroActivity.this, PackagesListActivity.class);
-        intent_packages_list.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent_packages_list);
+    private void launchInformationScreen() {
+        Intent intent_instructions = new Intent(SplashIntroActivity.this, InstructionsActivity.class);
+        intent_instructions.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent_instructions.putExtra("first_time",true);
+        startActivity(intent_instructions);
         finish();
     }
 

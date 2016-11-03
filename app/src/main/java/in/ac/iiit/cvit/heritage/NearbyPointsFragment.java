@@ -333,7 +333,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
                     pitch = pitch + (float)Math.PI/2;
                 }
 
-                Log.d(LOGTAG,"calling computeNearby");
+ //               Log.d(LOGTAG,"calling computeNearby");
                 computeNearby(currentLatitude, currentLongitude);
                 refreshRecyclerView();
 

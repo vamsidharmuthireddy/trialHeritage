@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_instructions:
                 Intent intent_instructions = new Intent(MainActivity.this, InstructionsActivity.class);
+                intent_instructions.putExtra("first_time",false);
                 startActivity(intent_instructions);
                 break;
             default:

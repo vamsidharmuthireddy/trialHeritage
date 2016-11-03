@@ -16,6 +16,17 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="15dp"
+            android:text="Working of Heritage"
+            android:textColor="@color/colorBlack"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
             android:text="Downloading the package"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
@@ -120,7 +131,16 @@
             android:paddingRight="15dp"
             android:text="@string/places_instructions"
             android:textSize="18sp" />
-
+        <Button
+            android:id="@+id/done_with_instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/got_it"
+            android:layout_gravity="right"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"/>
 
     </LinearLayout>
 
