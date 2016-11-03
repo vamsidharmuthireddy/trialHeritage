@@ -1,7 +1,9 @@
 package in.ac.iiit.cvit.heritage;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -24,6 +26,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class PackageDownloader extends AsyncTask<String, String, String> {
+    public static final int READ_TIMEOUT = 15000;
+    public static final int CONNECTION_TIMEOUT = 10000;
+    public static final String LOGTAG = "Heritage";
+    public static final String EXTRACT_DIR = "heritage/extracted/";
+    public static final String COMPRESSED_DIR = "heritage/compressed/";
     /**
      * This class is used to download the package from particular website as a compressed file
      * and extract it
@@ -33,35 +40,43 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
     private ProgressDialog progressDialog;
     private HttpURLConnection httpURLConnection;
 
-    public static final int READ_TIMEOUT = 15000;
-    public static final int CONNECTION_TIMEOUT = 10000;
-
-    public static final String LOGTAG = "Heritage";
-    public static final String EXTRACT_DIR = "heritage/extracted/";
-    public static final String COMPRESSED_DIR = "heritage/compressed/";
-
     public PackageDownloader(Context context) {
         _context = context;
     }
 
+    /**
+     * Setting up the progress bar showing the download
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
         progressDialog = new ProgressDialog(_context);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setProgress(0);
         progressDialog.setMessage("Downloading Package");
         progressDialog.setCancelable(false);
         progressDialog.show();
+
+        Log.v(LOGTAG, "Progress is " + progressDialog.getProgress());
     }
 
+    /**
+     * Downloads the tar.gz file in the background
+     *
+     * @param params name of the package to download
+     * @return status of the package to be downloaded(download successful or not)
+     */
     @Override
-    protected String doInBackground(String... params){
+    protected String doInBackground(String... params) {
         String archive_name = params[0] + ".tar.gz";
         String address = "http://preon.iiit.ac.in/~heritage/packages/" + archive_name;
         initializeDirectory();
         File baseLocal = Environment.getExternalStorageDirectory();
 
         try {
+            //setting up the connection to download the package
             url = new URL(address);
             httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setReadTimeout(READ_TIMEOUT);
@@ -72,14 +87,21 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
 
             int responseCode = httpURLConnection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                File archive = new File(baseLocal, COMPRESSED_DIR+archive_name);
+                //if package got downloaded, then store it in default storage location
+                //~storage/heritage/compressed/golkonda----if golkonda package is selected
+                File archive = new File(baseLocal, COMPRESSED_DIR + archive_name);
                 FileOutputStream archiveStream = new FileOutputStream(archive);
 
                 InputStream input = httpURLConnection.getInputStream();
+                int content_length = httpURLConnection.getContentLength();
                 try {
                     byte[] buffer = new byte[1024];
                     int len = 0;
+                    long downloaded_length = 0; //size of downloaded file
                     while ((len = input.read(buffer)) != -1) {
+                        downloaded_length = downloaded_length + len;
+                        publishProgress("" + (int) ((downloaded_length * 100) / content_length));
+
                         archiveStream.write(buffer, 0, len);
                     }
                     archiveStream.close();
@@ -92,6 +114,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
 
                 return "Package Download Completed";
             } else {
+                //if, we are not able to connect then package won't get downloaded
                 return "Connection Unsuccessful: " + String.valueOf(responseCode);
             }
         } catch (MalformedURLException e) {
@@ -108,28 +131,68 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
         }
     }
 
+    /**
+     * Updating progress bar
+     *
+     * @param progress percentage of downloaded content
+     */
+    protected void onProgressUpdate(String... progress) {
+        // setting progress percentage
+        progressDialog.setProgress(Integer.parseInt(progress[0]));
+    }
+
+    /**
+     * Showing the download completion/unsuccessful dialog
+     * @param result String showing the download status
+     */
     @Override
     protected void onPostExecute(String result) {
         progressDialog.dismiss();
-        //Log.i(LOGTAG, result);
+        Log.i(LOGTAG, result);
 
-        if (result.equals("Package Download Complete")) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(_context);
+
+        alertDialog.setTitle("Download Update");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                });
+
+
+
+        if (result.equals("Package Download Completed")) {
+            alertDialog .setMessage(result);
+            alertDialog.show();
+        }else{
+            alertDialog .setMessage("Package couldn't be downloaded");
+            alertDialog.show();
         }
+
     }
 
-    void initializeDirectory(){
+    /**
+     * Creating the directories for the package i.e compressed, extracted
+     */
+    void initializeDirectory() {
         File baseLocal = Environment.getExternalStorageDirectory();
         File extracted = new File(baseLocal, EXTRACT_DIR);
-        if (!extracted.exists()){
+        if (!extracted.exists()) {
             extracted.mkdirs();
         }
         File compressed = new File(baseLocal, COMPRESSED_DIR);
-        if (!compressed.exists()){
+        if (!compressed.exists()) {
             compressed.mkdirs();
         }
     }
 
-    void ExtractPackage(String archiveName){
+    /**
+     * Extracting the package from compresses tar.gz file
+     *
+     * @param archiveName name of the tar file with extension
+     */
+    void ExtractPackage(String archiveName) {
         File baseLocal = Environment.getExternalStorageDirectory();
         File archive = new File(baseLocal, COMPRESSED_DIR + archiveName);
         File destination = new File(baseLocal, EXTRACT_DIR);
@@ -160,8 +223,8 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                 entry = tarArchiveInputStream.getNextTarEntry();
             }
             tarArchiveInputStream.close();
-        } catch(Exception e){
-            //Log.i(LOGTAG, e.toString());
+        } catch (Exception e) {
+            Log.i(LOGTAG, e.toString());
         }
     }
 }

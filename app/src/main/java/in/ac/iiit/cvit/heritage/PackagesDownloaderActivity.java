@@ -1,6 +1,8 @@
 package in.ac.iiit.cvit.heritage;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +21,7 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
      * This class displays the packages available for download. Upon click, downloads the relevant package
      */
     private ListView listview_available_packages;
+    private Toolbar toolbar;
 
     private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 3;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 4;
@@ -26,6 +30,10 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_downloader);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitle(R.string.available_for_download);
+        setSupportActionBar(toolbar);
 
         //temporary hard coding
         String[] packages = {"Golconda", "Hampi"};
@@ -38,13 +46,44 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
         listview_available_packages.setClickable(true);
         listview_available_packages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                //downloading the selected package
                 String list_item = adapter.getItem(position).toLowerCase();
-                new PackageDownloader(PackagesDownloaderActivity.this).execute(list_item);
+
+                new AlertDialog.Builder(PackagesDownloaderActivity.this)
+                        .setMessage("Do you want to download the " + list_item + " package?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                            // do something when the button is clicked
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                                String list_item_copy = adapter.getItem(position).toLowerCase();
+                                new PackageDownloader(PackagesDownloaderActivity.this).execute(list_item_copy);
+
+                                //don't use finish here. Because we will be showing progress bar for download
+                                //finish();//
+                                //close();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                            // do something when the button is clicked
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //onBackPressed();
+                            }
+                        })
+                        .show();
+
+
             }
         });
 
         ActivityCompat.requestPermissions(PackagesDownloaderActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
     }
 
     @Override

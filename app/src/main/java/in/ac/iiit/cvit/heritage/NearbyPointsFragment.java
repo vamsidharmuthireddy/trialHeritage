@@ -16,7 +16,6 @@ import android.support.v4.util.Pair;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +86,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
         mSensorManager = (SensorManager)_context.getSystemService(SENSOR_SERVICE);
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        Log.d(LOGTAG,"sensors in onCreate got created");
+//        Log.d(LOGTAG,"sensors in onCreate got created");
 
         //can we try the below code?
  //       interestPoints = MainActivity.interestPoints;
@@ -158,7 +157,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
     public void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
-        Log.v(this.getClass().getSimpleName(), "onPause()");
+ //       Log.v(this.getClass().getSimpleName(), "onPause()");
 
 
         //Disconnect from API onPause()
@@ -444,9 +443,9 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
             });
 
 
-            Log.d(LOGTAG, "angle1 = "+finalThreeAngleIndices.get(0).first * 180/Math.PI);
-            Log.d(LOGTAG, "angle2 = "+finalThreeAngleIndices.get(1).first * 180/Math.PI);
-            Log.d(LOGTAG, "angle3 = "+finalThreeAngleIndices.get(2).first * 180/Math.PI);
+//            Log.d(LOGTAG, "angle1 = "+finalThreeAngleIndices.get(0).first * 180/Math.PI);
+//            Log.d(LOGTAG, "angle2 = "+finalThreeAngleIndices.get(1).first * 180/Math.PI);
+//            Log.d(LOGTAG, "angle3 = "+finalThreeAngleIndices.get(2).first * 180/Math.PI);
         }
         //setting the order of three points based on the view angles of the nearest points
         for (int i=0; i<Math.min(TRUNCATION_LIMIT, interestPoints.size()); i++) {
