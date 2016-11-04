@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ public class InterestPointsFragment extends Fragment {
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
     private ArrayList<InterestPoint> interestPoints;
 
-    private static final String LOGTAG = "Heritage";
+    private static final String LOGTAG = "Heritage:PLACES";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class InterestPointsFragment extends Fragment {
 
                         Intent intent_interest_point = new Intent(getActivity(), InterestPointActivity.class);
                         intent_interest_point.putExtra("interest_point", text);
+                        Log.v(LOGTAG,"InterestPointActivity is called");
                         startActivity(intent_interest_point);
                     }
                 })

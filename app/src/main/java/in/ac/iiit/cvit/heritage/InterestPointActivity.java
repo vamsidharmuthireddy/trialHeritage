@@ -43,6 +43,7 @@ public class InterestPointActivity extends AppCompatActivity {
         sessionManager = new SessionManager();
         final String packageName = sessionManager.getStringSessionPreferences(InterestPointActivity.this, "package_name", "");
 
+        //we are getting tha name of the interest point that was clicked
         Intent intent = getIntent();
         final String text_interest_point = intent.getStringExtra("interest_point");
         interestPoint = LoadInterestPoint(packageName, text_interest_point);
@@ -76,14 +77,34 @@ public class InterestPointActivity extends AppCompatActivity {
         textview_videos.setText(R.string.videos);
         textview_audio.setText(R.string.audio);
 
+        //setting onClickListener for images button of the interest point
         cardview_images.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //call the ImagePagerFragmentActivity to display the relevant images of the selected interest point
                 Intent intent_image_slider = new Intent(InterestPointActivity.this, ImagePagerFragmentActivity.class);
                 intent_image_slider.putExtra("interest_point", text_interest_point);
                 startActivity(intent_image_slider);
             }
         });
+
+        //setting onClickListener for videos button of the interest point
+        cardview_videos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //setting onClickListener for audios button of the interest point
+        cardview_audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
     }
 
     @Override

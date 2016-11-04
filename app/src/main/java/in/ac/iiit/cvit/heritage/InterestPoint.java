@@ -1,5 +1,6 @@
 package in.ac.iiit.cvit.heritage;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -32,6 +33,10 @@ public class InterestPoint {
         return details.get(key);
     }
 
+    /**
+     * This class is used to get the image related to a particular interest point
+     * @return Image of Interest point in Bitmap data type
+     */
     public Bitmap getImage() {
         String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/golconda/" + details.get("image") + ".JPG";
         File imageFile = new File(image_path);
@@ -45,6 +50,14 @@ public class InterestPoint {
         return null;
     }
 
+    /**
+     * This class is called from ImagePagerFragmentActivity when Image button is clicked
+     * This class is used to get all the images related to a particular interest point.
+     * This class is hard coded.
+     *
+     * @return Images of Interest point in Bitmap Array data type
+     */
+/*
     public ArrayList<Bitmap> getImages() {
         String[] image_names = {"a1", "a2", "a3", "a4", "a5"};
         ArrayList<Bitmap> image_bitmaps = new ArrayList<Bitmap>();
@@ -62,6 +75,41 @@ public class InterestPoint {
 
         return image_bitmaps;
     }
+*/
+
+    /**
+     * This class is called from ImagePagerFragmentActivity when Image button is clicked
+     * This class is used to get all the images related to a particular interest point.
+     * This class is not hard coded.
+     *
+     * @return Images of Interest point in Bitmap Array data type
+     */
+    public ArrayList<Bitmap> getImages(Context context) {
+
+        SessionManager sessionManager = new SessionManager();
+        String packageName = sessionManager.getStringSessionPreferences(context,"package_name","");
+        packageName = packageName.toLowerCase();
+
+        String[] image_names = {"a1", "a2", "a3", "a4", "a5"};
+        ArrayList<Bitmap> image_bitmaps = new ArrayList<Bitmap>();
+
+        for (int i=0; i<image_names.length; i++) {
+            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/golconda/" + image_names[i] + ".JPG";
+//            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/"+packageName+"/" + image_names[i] + ".JPG";
+
+            File imageFile = new File(image_path);
+            if (imageFile.exists()) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+                image_bitmaps.add(bitmap);
+            }
+        }
+
+        return image_bitmaps;
+    }
+
+
 
     private double betweenDistance;
 

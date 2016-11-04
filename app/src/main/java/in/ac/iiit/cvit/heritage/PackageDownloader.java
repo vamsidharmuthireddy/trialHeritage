@@ -92,7 +92,10 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                 File archive = new File(baseLocal, COMPRESSED_DIR + archive_name);
                 FileOutputStream archiveStream = new FileOutputStream(archive);
 
+                //getting the package
                 InputStream input = httpURLConnection.getInputStream();
+
+                //getting the size of the package
                 int content_length = httpURLConnection.getContentLength();
                 try {
                     byte[] buffer = new byte[1024];

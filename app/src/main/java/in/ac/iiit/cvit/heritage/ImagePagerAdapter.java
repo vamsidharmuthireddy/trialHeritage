@@ -1,14 +1,13 @@
 package in.ac.iiit.cvit.heritage;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
-import java.util.ArrayList;
-
+/**
+ * This class is used as adapter to view the images when Image button is clicked in InterestPointActivity
+ */
 public class ImagePagerAdapter extends FragmentStatePagerAdapter {
 
     private int _tabCount;

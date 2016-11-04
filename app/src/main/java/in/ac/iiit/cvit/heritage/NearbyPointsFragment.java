@@ -16,6 +16,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,6 +127,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
                     Intent intent_interest_point = new Intent(getActivity(), InterestPointActivity.class);
                     //passing the title of the clicked interest point to InterestPintActivity
                     intent_interest_point.putExtra("interest_point", text);
+                    Log.v(LOGTAG,"InterestPointActivity is called");
                     startActivity(intent_interest_point);
                 }
             })
@@ -147,8 +149,8 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
     @Override
     public void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
-        mSensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(this, accelerometer, 5000);
+        mSensorManager.registerListener(this, magnetometer, 5000);
         //Now lets connect to the API
         mGoogleApiClient.connect();
     }
