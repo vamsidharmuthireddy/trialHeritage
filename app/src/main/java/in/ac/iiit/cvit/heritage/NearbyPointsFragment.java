@@ -31,6 +31,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -65,6 +66,11 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
 
     private static final int TRUNCATION_LIMIT = 3;
 
+
+    private static final int waitTimeInSeconds = 2;
+    private long currentTime;
+    private long previousTime;
+
     Float azimuth = (float)0;
     Float pitch = (float)0;
     Float roll = (float)0;
@@ -83,6 +89,10 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
         _context = getActivity();
         mGoogleApiClient = null;
         createLocationClients();
+
+        Calendar calendar = Calendar.getInstance();
+        currentTime = calendar.getTimeInMillis();
+        previousTime = 0;
 
         mSensorManager = (SensorManager)_context.getSystemService(SENSOR_SERVICE);
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -110,15 +120,18 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
     }
 
     private void refreshRecyclerView() {
-
+        //setting the view of the NEARBY tab
+//        Log.v(LOGTAG, "going to set sorted interest points");
         recyclerViewAdapter = new NearbyPointsRecyclerViewAdapter(sortedInterestPoints);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+//        Log.v(LOGTAG, "Set sorted interest points and going to set OnItemTouchListener for recycler view");
         recyclerView.addOnItemTouchListener(
             new RecyclerViewOnItemClickListener(getActivity(), new RecyclerViewOnItemClickListener.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
+                    Log.v(LOGTAG,"onItemClick registered in RecyclerViewOnItemClickListener");
                     RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForLayoutPosition(position);
                     //getting the title of the clicked interest point
                     TextView textView = (TextView) viewHolder.itemView.findViewById(R.id.cardview_text);
@@ -290,7 +303,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
         currentLongitude = location.getLongitude();
         //Toast.makeText(_context, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
         computeNearby(currentLatitude, currentLongitude);
-        refreshRecyclerView();
+
 
     }
 
@@ -335,12 +348,22 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
                 }
 
  //               Log.d(LOGTAG,"calling computeNearby");
-                computeNearby(currentLatitude, currentLongitude);
-                refreshRecyclerView();
+ //               computeNearby(currentLatitude, currentLongitude);
 
  //               Log.d("onSensorChanged:", "azimuth = "+ azimuth);
    //             Log.d("onSensorChanged:", "oldAzimuth = "+ oldAzimuth);
             }
+
+            Calendar calendar = Calendar.getInstance();
+            currentTime = calendar.getTimeInMillis();
+            int timeDifference = (int) (currentTime - previousTime)/1000;
+            Log.v(LOGTAG, "currentTime = "+currentTime+" previousTime = "+previousTime+" timeDifference = "+timeDifference);
+            if(timeDifference > waitTimeInSeconds){
+                computeNearby(currentLatitude,currentLongitude);
+                previousTime = currentTime;
+            }
+
+
 
         }
     }
@@ -454,6 +477,8 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
             interestPoint = interestPoints.get(finalThreeAngleIndices.get(i).second);
             sortedInterestPoints.set(i, interestPoint);
         }
+
+        refreshRecyclerView();
 
     }
 

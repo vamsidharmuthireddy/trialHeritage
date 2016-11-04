@@ -95,7 +95,7 @@ public class SplashIntroActivity extends AppCompatActivity {
     }
 
     /**
-     * This function shows the list of Heritage site packages available
+     * This function shows the Instructioons
      */
     private void launchInformationScreen() {
         Intent intent_instructions = new Intent(SplashIntroActivity.this, InstructionsActivity.class);

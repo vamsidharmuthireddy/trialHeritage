@@ -1,6 +1,5 @@
 package in.ac.iiit.cvit.heritage;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -13,11 +12,15 @@ public class InterestPoint {
 
     private int _id;
     private HashMap<String, String> details;
+    private SessionManager sessionManager;
+
+
 
     private static final String LOGTAG = "Heritage";
 
     public InterestPoint() {
         details = new HashMap<String, String>();
+
     }
 
     /**
@@ -50,32 +53,7 @@ public class InterestPoint {
         return null;
     }
 
-    /**
-     * This class is called from ImagePagerFragmentActivity when Image button is clicked
-     * This class is used to get all the images related to a particular interest point.
-     * This class is hard coded.
-     *
-     * @return Images of Interest point in Bitmap Array data type
-     */
-/*
-    public ArrayList<Bitmap> getImages() {
-        String[] image_names = {"a1", "a2", "a3", "a4", "a5"};
-        ArrayList<Bitmap> image_bitmaps = new ArrayList<Bitmap>();
 
-        for (int i=0; i<image_names.length; i++) {
-            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/golconda/" + image_names[i] + ".JPG";
-            File imageFile = new File(image_path);
-            if (imageFile.exists()) {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-                Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-                image_bitmaps.add(bitmap);
-            }
-        }
-
-        return image_bitmaps;
-    }
-*/
 
     /**
      * This class is called from ImagePagerFragmentActivity when Image button is clicked
@@ -84,18 +62,20 @@ public class InterestPoint {
      *
      * @return Images of Interest point in Bitmap Array data type
      */
-    public ArrayList<Bitmap> getImages(Context context) {
+    public ArrayList<Bitmap> getImages(String packageName, String interestPointName) {
 
-        SessionManager sessionManager = new SessionManager();
-        String packageName = sessionManager.getStringSessionPreferences(context,"package_name","");
         packageName = packageName.toLowerCase();
+
+        //Add the code to automatically generate the list of relevant images for the interest point
+        //Change th format of xml file for this
+        //Change the below hard code for strings
 
         String[] image_names = {"a1", "a2", "a3", "a4", "a5"};
         ArrayList<Bitmap> image_bitmaps = new ArrayList<Bitmap>();
 
         for (int i=0; i<image_names.length; i++) {
-            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/golconda/" + image_names[i] + ".JPG";
-//            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/"+packageName+"/" + image_names[i] + ".JPG";
+//            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/golconda/" + image_names[i] + ".JPG";
+            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/"+packageName+"/" + image_names[i] + ".JPG";
 
             File imageFile = new File(image_path);
             if (imageFile.exists()) {

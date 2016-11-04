@@ -36,6 +36,7 @@ public class InterestPointsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerViewLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
+
         //setting the view of the PLACES tab
         recyclerViewAdapter = new InterestPointsRecyclerViewAdapter(interestPoints);
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -50,6 +51,7 @@ public class InterestPointsFragment extends Fragment {
                         String text = textView.getText().toString();
 
                         Intent intent_interest_point = new Intent(getActivity(), InterestPointActivity.class);
+                        //passing the title of the clicked interest point to InterestPintActivity
                         intent_interest_point.putExtra("interest_point", text);
                         Log.v(LOGTAG,"InterestPointActivity is called");
                         startActivity(intent_interest_point);

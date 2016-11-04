@@ -38,7 +38,7 @@ public class ImagePagerFragmentActivity extends FragmentActivity {
         //Loading the relevant interest point
         interestPoint = LoadInterestPoint(packageName, text_interest_point);
         //Getting the relevant images for the selected interest point
-        _images = interestPoint.getImages(ImagePagerFragmentActivity.this);
+        _images = interestPoint.getImages(packageName,text_interest_point);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_images);
         imagePagerAdapter = new ImagePagerAdapter(getSupportFragmentManager(), _images.size());

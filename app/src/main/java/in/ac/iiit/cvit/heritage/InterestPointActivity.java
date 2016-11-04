@@ -88,7 +88,7 @@ public class InterestPointActivity extends AppCompatActivity {
             }
         });
 
-        //setting onClickListener for videos button of the interest point
+/*        //setting onClickListener for videos button of the interest point
         cardview_videos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,7 @@ public class InterestPointActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
 
     }
