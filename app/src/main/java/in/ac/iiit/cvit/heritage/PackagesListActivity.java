@@ -44,7 +44,8 @@ public class PackagesListActivity extends AppCompatActivity {
         });
 
         //Setting the packages to be displayed to the user
-        String[] packages = {"Golconda", "Hampi"};
+        //String[] packages = {"Golconda", "Hampi"};
+        String[] packages = getResources().getStringArray(R.array.my_packages);
         listview_package_list = (ListView) findViewById(R.id.listview_package_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesListActivity.this, android.R.layout.simple_list_item_1, packages);
         listview_package_list.setAdapter(adapter);
@@ -54,7 +55,7 @@ public class PackagesListActivity extends AppCompatActivity {
                 TextView textView = (TextView) view;
                 //getting the name of the package which was clicked and setting the session
                 String packageName = (String) textView.getText();
-                sessionManager.setSessionPreferences(PackagesListActivity.this, "package_name", packageName);
+                sessionManager.setSessionPreferences(PackagesListActivity.this, getString(R.string.package_name), packageName);
                 
                 Intent intent_main_activity = new Intent(PackagesListActivity.this, MainActivity.class);
                 intent_main_activity.putExtra("package", packageName);

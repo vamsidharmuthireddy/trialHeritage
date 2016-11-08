@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 
 /**
  * Created by HOME on 28-10-2016. by vamsi
@@ -31,7 +30,7 @@ public class gettingViewAngle extends Activity implements SensorEventListener {
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        Log.d("gettingViewAngle:","in onCreateSensor got Created");
+ //       Log.d("gettingViewAngle:","in onCreateSensor got Created");
     }
 
     protected void onResume() {
@@ -79,8 +78,8 @@ public class gettingViewAngle extends Activity implements SensorEventListener {
 //                pitch = (float)(180 * orientation[1] / Math.PI);
 //                roll = (float) (180 * orientation[2] / Math.PI);
 
-                Log.d("onSensorChanged:", "azimuth = "+ azimuth);
-                Log.d("onSensorChanged:", "oldAzimuth = "+ oldAzimuth);
+//                Log.d("onSensorChanged:", "azimuth = "+ azimuth);
+//                Log.d("onSensorChanged:", "oldAzimuth = "+ oldAzimuth);
             }
         }
     }
@@ -112,7 +111,7 @@ public class gettingViewAngle extends Activity implements SensorEventListener {
                 b = 1;
                 c = (Math.tan((double) angle) * currentLatitude) - currentLongitude;
             }
-            Log.d("setLine:Using azimuth", "azimuth = "+ angle);
+ //           Log.d("setLine:Using azimuth", "azimuth = "+ angle);
 
             coEfficients[0] = a ;
             coEfficients[1] = b ;
@@ -135,7 +134,7 @@ public class gettingViewAngle extends Activity implements SensorEventListener {
                 b = 1;
                 c = (Math.tan((double) angle) * currentLatitude) - currentLongitude;
             }
-            Log.d("setLine:UsingOldAzimuth", "oldAzimuth = "+ angle);
+//            Log.d("setLine:UsingOldAzimuth", "oldAzimuth = "+ angle);
 
             coEfficients[0] = a ;
             coEfficients[1] = b ;

@@ -30,18 +30,20 @@ public class ImagePagerFragmentActivity extends FragmentActivity {
 
         //getting the name of the package selected by the user(For e.g. Golkonda)
         sessionManager = new SessionManager();
-        final String packageName = sessionManager.getStringSessionPreferences(ImagePagerFragmentActivity.this, "package_name", "");
+        final String packageName = sessionManager
+                .getStringSessionPreferences(
+                        ImagePagerFragmentActivity.this, getString(R.string.package_name), getString(R.string.default_package_value));
 
         //getting the name of the interest point selected by the user
         Intent intent = getIntent();
-        final String text_interest_point = intent.getStringExtra("interest_point");
+        final String clicked_interest_point = intent.getStringExtra(getString(R.string.clicked_interest_point));
         //Loading the relevant interest point
-        interestPoint = LoadInterestPoint(packageName, text_interest_point);
+        interestPoint = LoadInterestPoint(packageName, clicked_interest_point);
         //Getting the relevant images for the selected interest point
-        _images = interestPoint.getImages(packageName,text_interest_point);
+        _images = interestPoint.getImages(packageName,clicked_interest_point);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_images);
-        imagePagerAdapter = new ImagePagerAdapter(getSupportFragmentManager(), _images.size());
+        imagePagerAdapter = new ImagePagerAdapter(getSupportFragmentManager(), _images.size(),this);
         viewPager.setAdapter(imagePagerAdapter);
         //viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
@@ -69,7 +71,7 @@ public class ImagePagerFragmentActivity extends FragmentActivity {
         InterestPoint interestPoint;
         for (int i=0; i<interestPoints.size(); i++) {
             interestPoint = interestPoints.get(i);
-            if (interestPoint.get("title").equals(interestPointName)) {
+            if (interestPoint.get(getString(R.string.interest_point_title)).equals(interestPointName)) {
                 return interestPoint;
             }
         }

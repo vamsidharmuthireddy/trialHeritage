@@ -1,25 +1,57 @@
 <resources>
+
+    <!--SplashscreenAcivity-->
     <string name="heritage_caps">HERITAGE</string>
     <string name="powered_by">Powered By</string>
 
-
+    <!--for the splashIntro screen-->
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="got_it">Got It</string>
+    <string name="page_number">page_number</string>
+    <string name="splash_intro_displays">3</string>
+    <string-array name="intro_caption">
+        <item>Know all about Indian Heritage</item>
+        <item>Realtime updates based on Site Location</item>
+        <item>Get all the information at your Fingertips</item>
+    </string-array>
 
+    <!--LaunchPreferenceManager-->
+    <string name="launch_preferences">launch_preferences</string>
+    <string name="IS_FIRST_TIME_LAUNCH">IsFirstTimeLaunch</string>
+
+    <!--PackageListActivity screen-->
     <string name="my_heritage_sites">My Heritage Sites</string>
     <string name="download">Download</string>
+    <array name="my_packages">
+        <item>Golconda</item>
+        <item>Hampi</item>
+    </array>
 
+    <!--PackageDownloaderActivity screen-->
     <string name="available_for_download">Click to download</string>
+    <array name="download_packages">
+        <item>Golconda</item>
+        <item>Hampi</item>
+    </array>
 
+    <!--SessionManager-->
+    <string name="user_session">UserSession</string>
+    <string name="package_name">package_name</string>
+    <string name="default_package_value"></string>
+
+
+    <!--MainActivity-->
     <string name="app_name">Heritage</string>
     <string name="home">Home</string>
     <string name="nearby">Nearby</string>
     <string name="places">Places</string>
 
+    <!--Menu-->
     <string name="settings">Settings</string>
     <string name="about_us">About Us</string>
 
+    <!--InstructionsActivity-->
     <string name="instructions">Instructions</string>
     <string name="general_instructions">General Instructions</string>
     <string name="nearby_instructions">This tab shows the list of three monuments/sites that are nearest to you.</string>
@@ -27,16 +59,27 @@
     <string name="home_instructions">In the HOME tab, you can see the information about the heritage site that you have selected.</string>
     <string name="selecting_package">After you are done downloading the package, press back button and select the name of the package from the list of available packages. In the next screen you can see three tabs.</string>
     <string name="downloading_package">When you open the app, you see a list of packages available for you. You can access them once you download them using Download Package button and selecting the required package.</string>
+    <string name="first_time_instructions">first_time</string>
 
-
+    <!--InterestPointActivity-->
     <string name="images">Images</string>
     <string name="videos">Videos</string>
     <string name="audio">Audio</string>
     <string name="download_packages">Download Packages</string>
 
-    <string-array name="intro_caption">
-        <item>Know all about Indian Heritage</item>
-        <item>Realtime updates based on Site Location</item>
-        <item>Get all the information at your Fingertips</item>
-    </string-array>
+    <!--ImagePageAdapter-->
+    <string name="image_number">image_number</string>
+
+    <!--clicked InterestPoint name-->
+    <string name="clicked_interest_point">interest_point</string>
+
+    <!--xml tags-->
+    <string name="interest_point_title">title</string>
+    <string name="interest_point_latitude">lat</string>
+    <string name="interest_point_longitude">long</string>
+    <string name="interest_point_caption">caption</string>
+    <string name="interest_point_image">image</string>
+    <string name="interest_point_info">info</string>
+
+
 </resources>

@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class ImageViewFragment extends Fragment {
-
+    /**
+     * Inflates the image on the screen when window is slided after pressing Image button
+     */
     private Bitmap bitmap;
     private ImageView imageView;
 
@@ -18,7 +20,7 @@ public class ImageViewFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_imageview, container, false);
 
         Bundle bundle = getArguments();
-        bitmap = ((ImagePagerFragmentActivity) this.getActivity())._images.get(bundle.getInt("image_number"));
+        bitmap = ((ImagePagerFragmentActivity) this.getActivity())._images.get(bundle.getInt(getString(R.string.image_number)));
         imageView = (ImageView) root.findViewById(R.id.imageview_slider);
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         imageView.setImageBitmap(bitmap);

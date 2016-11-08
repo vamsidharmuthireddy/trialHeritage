@@ -1,5 +1,6 @@
 package in.ac.iiit.cvit.heritage;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ public class InterestPointsRecyclerViewAdapter extends RecyclerView.Adapter<Inte
      * This class is called from InterestPointsFragment after we get all the interest points
      * This class sets the picture and text(Title) on the InterestPointsFragment's recycler view
      */
+    private Context context;
     private ArrayList<InterestPoint> interestPoints;
     private static final String LOGTAG = "Heritage";
 
@@ -29,7 +31,8 @@ public class InterestPointsRecyclerViewAdapter extends RecyclerView.Adapter<Inte
         }
     }
 
-    public InterestPointsRecyclerViewAdapter(ArrayList<InterestPoint> interestPoints) {
+    public InterestPointsRecyclerViewAdapter(ArrayList<InterestPoint> interestPoints, Context _context) {
+        context = _context;
         this.interestPoints = interestPoints;
         notifyDataSetChanged();
     }
@@ -46,7 +49,7 @@ public class InterestPointsRecyclerViewAdapter extends RecyclerView.Adapter<Inte
         ImageView imageView = holder.imageView;
         TextView textView = holder.textView;
 
-        textView.setText(interestPoints.get(position).get("title"));
+        textView.setText(interestPoints.get(position).get(context.getString(R.string.interest_point_title)));
         imageView.setImageBitmap(interestPoints.get(position).getImage());
     }
 

@@ -36,7 +36,8 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //temporary hard coding
-        String[] packages = {"Golconda", "Hampi"};
+       // String[] packages = {"Golconda", "Hampi"};
+        String[] packages = getResources().getStringArray(R.array.download_packages);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesDownloaderActivity.this, android.R.layout.simple_list_item_1, packages);
 
         listview_available_packages = (ListView) findViewById(R.id.listview_available_packages);
@@ -60,9 +61,6 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
                                 String list_item_copy = adapter.getItem(position).toLowerCase();
                                 new PackageDownloader(PackagesDownloaderActivity.this).execute(list_item_copy);
 
-                                //don't use finish here. Because we will be showing progress bar for download
-                                //finish();//
-                                //close();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

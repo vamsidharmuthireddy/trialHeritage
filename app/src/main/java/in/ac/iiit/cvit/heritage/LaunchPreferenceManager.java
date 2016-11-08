@@ -2,7 +2,6 @@ package in.ac.iiit.cvit.heritage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class LaunchPreferenceManager {
 
@@ -30,7 +29,7 @@ public class LaunchPreferenceManager {
     public void setFirstTimeLaunch(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
         editor.commit();
-        Log.v("setFirstTimeLaunch", "setting first time as "+ isFirstTime);
+ //       Log.v("setFirstTimeLaunch", "setting first time as "+ isFirstTime);
     }
 
     /**
@@ -39,7 +38,7 @@ public class LaunchPreferenceManager {
      * It was already set to false when we opende the app for the first time.
      */
     public boolean isFirstTimeLaunch() {
-        Log.v("isFirstTimeLaunch", "setting first time as "+ preferences.getBoolean(IS_FIRST_TIME_LAUNCH, true));
+ //       Log.v("isFirstTimeLaunch", "setting first time as "+ preferences.getBoolean(IS_FIRST_TIME_LAUNCH, true));
         return preferences.getBoolean(IS_FIRST_TIME_LAUNCH, true);
 
     }

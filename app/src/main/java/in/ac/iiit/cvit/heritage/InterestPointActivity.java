@@ -41,11 +41,13 @@ public class InterestPointActivity extends AppCompatActivity {
 
         //we are getting the name of the session(Heritage site that user initially clicked to see)
         sessionManager = new SessionManager();
-        final String packageName = sessionManager.getStringSessionPreferences(InterestPointActivity.this, "package_name", "");
+        final String packageName = sessionManager
+                .getStringSessionPreferences(
+                        InterestPointActivity.this, getString(R.string.package_name), getString(R.string.default_package_value));
 
         //we are getting tha name of the interest point that was clicked
         Intent intent = getIntent();
-        final String text_interest_point = intent.getStringExtra("interest_point");
+        final String text_interest_point = intent.getStringExtra(getString(R.string.clicked_interest_point));
         interestPoint = LoadInterestPoint(packageName, text_interest_point);
 
         toolbar = (Toolbar) findViewById(R.id.coordinatorlayout_toolbar);
@@ -63,8 +65,9 @@ public class InterestPointActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.coordinatorlayout_imageview);
         imageView.setImageBitmap(interestPoint.getImage());
 
+
         textview_info = (TextView) findViewById(R.id.cardview_text);
-        textview_info.setText(interestPoint.get("info"));
+        textview_info.setText(interestPoint.get(getString(R.string.interest_point_info)));
 
         cardview_images = (CardView) findViewById(R.id.card_images);
         textview_images = (TextView) cardview_images.findViewById(R.id.cardview_text);
@@ -83,12 +86,12 @@ public class InterestPointActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //call the ImagePagerFragmentActivity to display the relevant images of the selected interest point
                 Intent intent_image_slider = new Intent(InterestPointActivity.this, ImagePagerFragmentActivity.class);
-                intent_image_slider.putExtra("interest_point", text_interest_point);
+                intent_image_slider.putExtra(getString(R.string.clicked_interest_point), text_interest_point);
                 startActivity(intent_image_slider);
             }
         });
 
-/*        //setting onClickListener for videos button of the interest point
+        //setting onClickListener for videos button of the interest point
         cardview_videos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +105,7 @@ public class InterestPointActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             }
-        });*/
+        });
 
 
     }
@@ -132,7 +135,7 @@ public class InterestPointActivity extends AppCompatActivity {
         InterestPoint interestPoint;
         for (int i=0; i<interestPoints.size(); i++) {
             interestPoint = interestPoints.get(i);
-            if (interestPoint.get("title").equals(interestPointName)) {
+            if (interestPoint.get(getString(R.string.interest_point_title)).equals(interestPointName)) {
                 return interestPoint;
             }
         }

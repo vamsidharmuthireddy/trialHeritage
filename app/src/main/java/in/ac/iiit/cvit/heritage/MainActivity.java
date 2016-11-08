@@ -45,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         //setting the clicked heritage site as a new session
         sessionManager = new SessionManager();
-        String packageName = sessionManager.getStringSessionPreferences(MainActivity.this, "package_name", "");
+        String packageName = sessionManager
+                .getStringSessionPreferences(
+                        MainActivity.this, getString(R.string.package_name), getString(R.string.default_package_value));
 
         //getting data related to all the interest points available
         //The above interestPoints has the data on all available interest points
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_instructions:
                 Intent intent_instructions = new Intent(MainActivity.this, InstructionsActivity.class);
-                intent_instructions.putExtra("first_time",false);
+                intent_instructions.putExtra(getString(R.string.first_time_instructions),false);
                 startActivity(intent_instructions);
                 break;
             default:

@@ -12,7 +12,9 @@ import android.widget.Button;
  */
 
 public class InstructionsActivity extends AppCompatActivity {
-
+    /**
+     * This class provides the instruction for app uasge to the user
+     */
 
     private static final int SLEEP = 5;
     private static final String LOGTAG = "InstructionsActivity";
@@ -24,13 +26,13 @@ public class InstructionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_instructions);
 
-        first_time = getIntent().getExtras().getBoolean("first_time");
-        Log.v(LOGTAG, "first_time = " + first_time);
+        first_time = getIntent().getExtras().getBoolean(getString(R.string.first_time_instructions));
+//        Log.v(LOGTAG, "first_time = " + first_time);
         try {
 
             if (first_time) {
                 //This activity is only shown when opened for the first time after installing
-                Log.v(LOGTAG, "opened Instructions activity for the first time");
+//                Log.v(LOGTAG, "opened Instructions activity for the first time");
 
                 setContentView(R.layout.activity_instructions);
                 Button done_with_instructions = (Button) findViewById(R.id.done_with_instructions);
@@ -50,7 +52,7 @@ public class InstructionsActivity extends AppCompatActivity {
             } else {
 
                 //From second time whenever this app is opened, this activity is shown
-                Log.v(LOGTAG, "opened Instructions activity not for the first time");
+ //               Log.v(LOGTAG, "opened Instructions activity not for the first time");
 
                 setContentView(R.layout.activity_instructions);
                 Button done_with_instructions = (Button) findViewById(R.id.done_with_instructions);

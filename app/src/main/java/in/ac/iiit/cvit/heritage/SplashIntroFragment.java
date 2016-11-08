@@ -24,7 +24,7 @@ public class SplashIntroFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = getArguments();
-        pageNumber = bundle.getInt("page_number");
+        pageNumber = bundle.getInt(getString(R.string.page_number));
     }
 
     /**

@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ public class InterestPointsFragment extends Fragment {
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
         //setting the view of the PLACES tab
-        recyclerViewAdapter = new InterestPointsRecyclerViewAdapter(interestPoints);
+        recyclerViewAdapter = new InterestPointsRecyclerViewAdapter(interestPoints,getContext());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -52,8 +51,8 @@ public class InterestPointsFragment extends Fragment {
 
                         Intent intent_interest_point = new Intent(getActivity(), InterestPointActivity.class);
                         //passing the title of the clicked interest point to InterestPintActivity
-                        intent_interest_point.putExtra("interest_point", text);
-                        Log.v(LOGTAG,"InterestPointActivity is called");
+                        intent_interest_point.putExtra(getString(R.string.clicked_interest_point), text);
+//                        Log.v(LOGTAG,"InterestPointActivity is called");
                         startActivity(intent_interest_point);
                     }
                 })

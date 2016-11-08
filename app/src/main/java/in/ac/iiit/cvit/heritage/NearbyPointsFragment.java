@@ -122,7 +122,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
     private void refreshRecyclerView() {
         //setting the view of the NEARBY tab
 //        Log.v(LOGTAG, "going to set sorted interest points");
-        recyclerViewAdapter = new NearbyPointsRecyclerViewAdapter(sortedInterestPoints);
+        recyclerViewAdapter = new NearbyPointsRecyclerViewAdapter(sortedInterestPoints, getContext());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -131,16 +131,16 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
             new RecyclerViewOnItemClickListener(getActivity(), new RecyclerViewOnItemClickListener.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Log.v(LOGTAG,"onItemClick registered in RecyclerViewOnItemClickListener");
+ //                   Log.v(LOGTAG,"onItemClick registered in RecyclerViewOnItemClickListener");
                     RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForLayoutPosition(position);
                     //getting the title of the clicked interest point
                     TextView textView = (TextView) viewHolder.itemView.findViewById(R.id.cardview_text);
-                    String text = textView.getText().toString();
+                    String clicked_interest_point = textView.getText().toString();
 
                     Intent intent_interest_point = new Intent(getActivity(), InterestPointActivity.class);
                     //passing the title of the clicked interest point to InterestPintActivity
-                    intent_interest_point.putExtra("interest_point", text);
-                    Log.v(LOGTAG,"InterestPointActivity is called");
+                    intent_interest_point.putExtra(getString(R.string.clicked_interest_point), clicked_interest_point);
+ //                   Log.v(LOGTAG,"InterestPointActivity is called");
                     startActivity(intent_interest_point);
                 }
             })

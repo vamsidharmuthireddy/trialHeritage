@@ -1,5 +1,6 @@
 package in.ac.iiit.cvit.heritage;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ public class NearbyPointsRecyclerViewAdapter extends RecyclerView.Adapter<Nearby
      * This class is called from NearbyPointsFragment after we get nearby interest points
      * This class sets the picture and text(Title) on the NearbyPointsFragment's recycler view
      */
+    private Context context;
     private ArrayList<InterestPoint> interestPoints;
     private static final String LOGTAG = "Heritage";
 
@@ -33,7 +35,9 @@ public class NearbyPointsRecyclerViewAdapter extends RecyclerView.Adapter<Nearby
      * This method has the sortedInterestPoints obtained from NearbyPointsFragment
      * @param interestPoints contains the sorted list of three nearest interest points
      */
-    public NearbyPointsRecyclerViewAdapter(ArrayList<InterestPoint> interestPoints) {
+    public NearbyPointsRecyclerViewAdapter(ArrayList<InterestPoint> interestPoints, Context _context) {
+        context = _context;
+
         this.interestPoints = interestPoints;
         notifyDataSetChanged();
     }
@@ -50,7 +54,7 @@ public class NearbyPointsRecyclerViewAdapter extends RecyclerView.Adapter<Nearby
         ImageView imageView = holder.imageView;
         TextView textView = holder.textView;
 
-        textView.setText(interestPoints.get(position).get("title"));
+        textView.setText(interestPoints.get(position).get(context.getString(R.string.interest_point_title)));
         imageView.setImageBitmap(interestPoints.get(position).getImage());
     }
 

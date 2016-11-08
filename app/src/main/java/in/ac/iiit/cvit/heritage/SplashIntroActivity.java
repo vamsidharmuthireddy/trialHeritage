@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class SplashIntroActivity extends AppCompatActivity {
     /**
-     * This class is the one showing taj mahal and others as intro activity when app is first opened
+     * This class is the one showing tajmahal and others as intro activity when app is first opened
      */
     private Button button_next;
     private Button button_skip;
@@ -36,7 +36,7 @@ public class SplashIntroActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_splash);
-        splashIntroAdapter = new SplashIntroAdapter(getSupportFragmentManager());
+        splashIntroAdapter = new SplashIntroAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(splashIntroAdapter);   //find out more about this line
 
         button_next =(Button) findViewById (R.id.button_next);
@@ -95,12 +95,12 @@ public class SplashIntroActivity extends AppCompatActivity {
     }
 
     /**
-     * This function shows the Instructioons
+     * This function shows the launches the InstructionsActivity intent
      */
     private void launchInformationScreen() {
         Intent intent_instructions = new Intent(SplashIntroActivity.this, InstructionsActivity.class);
         intent_instructions.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent_instructions.putExtra("first_time",true);
+        intent_instructions.putExtra(getString(R.string.first_time_instructions),true);
         startActivity(intent_instructions);
         finish();
     }

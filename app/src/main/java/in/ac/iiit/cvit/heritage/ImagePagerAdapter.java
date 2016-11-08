@@ -1,5 +1,6 @@
 package in.ac.iiit.cvit.heritage;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,11 +12,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 public class ImagePagerAdapter extends FragmentStatePagerAdapter {
 
     private int _tabCount;
+    private Context context;
 
     private static final String LOGTAG = "Heritage";
 
-    public ImagePagerAdapter(FragmentManager fragmentManager, int tabCount) {
+    public ImagePagerAdapter(FragmentManager fragmentManager, int tabCount, Context _context) {
         super(fragmentManager);
+        context = _context;
         _tabCount = tabCount;
     }
 
@@ -24,7 +27,7 @@ public class ImagePagerAdapter extends FragmentStatePagerAdapter {
         ImageViewFragment imageViewFragment = new ImageViewFragment();
 
         Bundle args = new Bundle();
-        args.putInt("image_number", position);
+        args.putInt(context.getString(R.string.image_number), position);
         imageViewFragment.setArguments(args);
 
         return imageViewFragment;
