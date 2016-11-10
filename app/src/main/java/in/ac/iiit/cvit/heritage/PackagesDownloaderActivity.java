@@ -35,7 +35,7 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.available_for_download);
         setSupportActionBar(toolbar);
 
-        //temporary hard coding
+        //Packages available for download
        // String[] packages = {"Golconda", "Hampi"};
         String[] packages = getResources().getStringArray(R.array.download_packages);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesDownloaderActivity.this, android.R.layout.simple_list_item_1, packages);
