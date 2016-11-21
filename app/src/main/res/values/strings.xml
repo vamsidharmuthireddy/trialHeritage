@@ -79,6 +79,7 @@
     <string name="interest_point_longitude">long</string>
     <string name="interest_point_caption">caption</string>
     <string name="interest_point_image">image</string>
+    <string name="interest_point_images">images</string>
     <string name="interest_point_info">info</string>
 
 

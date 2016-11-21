@@ -46,6 +46,7 @@ public class ImagePagerFragmentActivity extends FragmentActivity {
         imagePagerAdapter = new ImagePagerAdapter(getSupportFragmentManager(), _images.size(),this);
         viewPager.setAdapter(imagePagerAdapter);
         //viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
     }
 
     @Override

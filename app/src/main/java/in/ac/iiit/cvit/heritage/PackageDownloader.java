@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -38,7 +39,10 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
     private URL url;
     private Context _context;
     private ProgressDialog progressDialog;
+
     private HttpURLConnection httpURLConnection;
+    private String packageName;
+    private String basePackageName;
 
     public PackageDownloader(Context context) {
         _context = context;
@@ -70,8 +74,9 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
      */
     @Override
     protected String doInBackground(String... params) {
-        String archive_name = params[0] + ".tar.gz";
-        String address = "http://preon.iiit.ac.in/~heritage/packages/" + archive_name;
+        basePackageName = params[0];
+        packageName = params[0] + ".tar.gz";
+        String address = "http://preon.iiit.ac.in/~heritage/packages/" + packageName;
         initializeDirectory();
         File baseLocal = Environment.getExternalStorageDirectory();
 
@@ -89,7 +94,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 //if package got downloaded, then store it in default storage location
                 //~storage/heritage/compressed/golkonda----if golkonda package is selected
-                File archive = new File(baseLocal, COMPRESSED_DIR + archive_name);
+                File archive = new File(baseLocal, COMPRESSED_DIR + packageName);
                 FileOutputStream archiveStream = new FileOutputStream(archive);
 
                 //getting the package
@@ -110,10 +115,11 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                     archiveStream.close();
                 } catch (IOException e) {
                     Log.i(LOGTAG, e.toString());
+                    return "Connection Lost";
                 }
 
                 //Log.i(LOGTAG, "Download Finished");
-                ExtractPackage(archive_name);
+                ExtractPackage(packageName);
 
                 return "Package Download Completed";
             } else {
@@ -156,19 +162,31 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(_context);
 
         alertDialog.setTitle("Download Update");
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
+        if(result.equals("Package Download Completed")){
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
+
+                        Intent intent_main_activity = new Intent(_context, MainActivity.class);
+                        intent_main_activity.putExtra("package", basePackageName);
+                        _context.startActivity(intent_main_activity);
+
                     }
                 });
 
-
-
-        if (result.equals("Package Download Completed")) {
-            alertDialog .setMessage(result);
+            alertDialog.setMessage(result+"\nClick to view "+basePackageName);
             alertDialog.show();
+
         }else{
+
+            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                // do something when the button is clicked
+                public void onClick(DialogInterface arg0, int arg1) {
+
+                }
+            });
+
             alertDialog .setMessage("Package couldn't be downloaded");
             alertDialog.show();
         }
@@ -180,6 +198,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
      */
     void initializeDirectory() {
         File baseLocal = Environment.getExternalStorageDirectory();
+        //File baseLocal = _context.getDir("Heritage",Context.MODE_PRIVATE);
         File extracted = new File(baseLocal, EXTRACT_DIR);
         if (!extracted.exists()) {
             extracted.mkdirs();
@@ -193,23 +212,28 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
     /**
      * Extracting the package from compresses tar.gz file
      *
-     * @param archiveName name of the tar file with extension
+     * @param packageName name of the tar file with extension
      */
-    void ExtractPackage(String archiveName) {
+    void ExtractPackage(String packageName) {
         File baseLocal = Environment.getExternalStorageDirectory();
-        File archive = new File(baseLocal, COMPRESSED_DIR + archiveName);
+        File archive = new File(baseLocal, COMPRESSED_DIR + packageName);
         File destination = new File(baseLocal, EXTRACT_DIR);
+
+
 
         try {
             TarArchiveInputStream tarArchiveInputStream = new TarArchiveInputStream(
                     new GzipCompressorInputStream(
                             new BufferedInputStream(
                                     new FileInputStream(archive))));
+
             TarArchiveEntry entry = tarArchiveInputStream.getNextTarEntry();
+
             while (entry != null) {
+
                 if (entry.isDirectory()) {
                     entry = tarArchiveInputStream.getNextTarEntry();
-                    Log.i(LOGTAG, "Found directory " + entry.getName());
+                   // Log.i(LOGTAG, "Found directory " + entry.getName());
                     continue;
                 }
 
@@ -222,13 +246,16 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                 OutputStream out = new FileOutputStream(currfile);
                 IOUtils.copy(tarArchiveInputStream, out);
                 out.close();
-                //Log.i(LOGTAG, entry.getName());
+              //  Log.i(LOGTAG, entry.getName());
                 entry = tarArchiveInputStream.getNextTarEntry();
             }
             tarArchiveInputStream.close();
         } catch (Exception e) {
-            Log.i(LOGTAG, e.toString());
+          //  Log.i(LOGTAG, e.toString());
         }
+
+
+
     }
 }
 

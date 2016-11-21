@@ -48,6 +48,7 @@ public class InterestPointActivity extends AppCompatActivity {
         //we are getting tha name of the interest point that was clicked
         Intent intent = getIntent();
         final String text_interest_point = intent.getStringExtra(getString(R.string.clicked_interest_point));
+        //loading the relevant interest point
         interestPoint = LoadInterestPoint(packageName, text_interest_point);
 
         toolbar = (Toolbar) findViewById(R.id.coordinatorlayout_toolbar);
@@ -63,7 +64,7 @@ public class InterestPointActivity extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ToolbarStyle);
 
         imageView = (ImageView) findViewById(R.id.coordinatorlayout_imageview);
-        imageView.setImageBitmap(interestPoint.getImage());
+        imageView.setImageBitmap(interestPoint.getImage(packageName,text_interest_point));
 
 
         textview_info = (TextView) findViewById(R.id.cardview_text);
@@ -85,9 +86,15 @@ public class InterestPointActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //call the ImagePagerFragmentActivity to display the relevant images of the selected interest point
-                Intent intent_image_slider = new Intent(InterestPointActivity.this, ImagePagerFragmentActivity.class);
-                intent_image_slider.putExtra(getString(R.string.clicked_interest_point), text_interest_point);
-                startActivity(intent_image_slider);
+                String allImages = interestPoint.get(getString(R.string.interest_point_images));
+                //If there are no images, don't respond to button click
+                if(!allImages.equals("")) {
+
+                    Intent intent_image_slider = new Intent(InterestPointActivity.this, ImagePagerFragmentActivity.class);
+                    intent_image_slider.putExtra(getString(R.string.clicked_interest_point), text_interest_point);
+                    startActivity(intent_image_slider);
+                }
+
             }
         });
 

@@ -2,6 +2,7 @@ package in.ac.iiit.cvit.heritage;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +55,15 @@ public class NearbyPointsRecyclerViewAdapter extends RecyclerView.Adapter<Nearby
         ImageView imageView = holder.imageView;
         TextView textView = holder.textView;
 
+        SessionManager sessionManager = new SessionManager();
+        final String packageName = sessionManager
+                .getStringSessionPreferences(
+                        context, context.getString(R.string.package_name), context.getString(R.string.default_package_value));
+
+
         textView.setText(interestPoints.get(position).get(context.getString(R.string.interest_point_title)));
-        imageView.setImageBitmap(interestPoints.get(position).getImage());
+        imageView.setImageBitmap(interestPoints.get(position).getImage(packageName,context.getString(R.string.interest_point_title)));
+        Log.v("NearybyRecycle","getImage");
     }
 
     @Override

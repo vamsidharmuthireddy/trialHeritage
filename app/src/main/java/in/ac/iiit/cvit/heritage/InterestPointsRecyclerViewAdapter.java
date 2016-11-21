@@ -49,8 +49,13 @@ public class InterestPointsRecyclerViewAdapter extends RecyclerView.Adapter<Inte
         ImageView imageView = holder.imageView;
         TextView textView = holder.textView;
 
+        SessionManager sessionManager = new SessionManager();
+        final String packageName = sessionManager
+                .getStringSessionPreferences(
+                        context, context.getString(R.string.package_name), context.getString(R.string.default_package_value));
+
         textView.setText(interestPoints.get(position).get(context.getString(R.string.interest_point_title)));
-        imageView.setImageBitmap(interestPoints.get(position).getImage());
+        imageView.setImageBitmap(interestPoints.get(position).getImage(packageName,context.getString(R.string.interest_point_title)));
     }
 
     @Override

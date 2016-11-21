@@ -16,7 +16,6 @@ import android.support.v4.util.Pair;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -357,7 +356,7 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
             Calendar calendar = Calendar.getInstance();
             currentTime = calendar.getTimeInMillis();
             int timeDifference = (int) (currentTime - previousTime)/1000;
-            Log.v(LOGTAG, "currentTime = "+currentTime+" previousTime = "+previousTime+" timeDifference = "+timeDifference);
+//            Log.v(LOGTAG, "currentTime = "+currentTime+" previousTime = "+previousTime+" timeDifference = "+timeDifference);
             if(timeDifference > waitTimeInSeconds){
                 computeNearby(currentLatitude,currentLongitude);
                 previousTime = currentTime;
