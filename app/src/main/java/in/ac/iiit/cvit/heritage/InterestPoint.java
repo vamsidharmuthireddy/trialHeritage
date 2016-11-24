@@ -3,7 +3,6 @@ package in.ac.iiit.cvit.heritage;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ public class InterestPoint {
     private SessionManager sessionManager;
 
     private static final String dataLocation = "Android/data/in.ac.iiit.cvit.heritage/files/extracted/";
+
     private static final String imageType = ".JPG";
     private static final String latitudeTag = "lat";
     private static final String longitudeTag = "long";
@@ -61,11 +61,11 @@ public class InterestPoint {
  //       Log.v("getImage","reached getImage");
 
 
-            String image_path = Environment.getExternalStorageDirectory() + "/" +
-                    dataLocation + packageName + "/" + imageName + imageType;
-            Log.v("getImage", image_path);
-            File imageFile = new File(image_path);
-            if(imageFile.exists()) {
+        String image_path =  dataLocation + packageName + "/" + imageName + imageType;
+
+        File imageFile = new File(Environment.getExternalStorageDirectory(),image_path);
+//        Log.v("getImage", Environment.getExternalStorageDirectory()+image_path);
+        if(imageFile.exists()) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
@@ -105,10 +105,9 @@ public class InterestPoint {
         for (int i = 0; i < imagesList.size(); i++) {
             String imageName = imagesList.get(i);
 //            Log.v("getImages",imageName);
-            String image_path = Environment.getExternalStorageDirectory() + "/" +
-                    dataLocation + packageName + "/" + imageName + imageType;
+            String image_path = dataLocation + packageName + "/" + imageName + imageType;
 
-            File imageFile = new File(image_path);
+            File imageFile = new File(Environment.getExternalStorageDirectory(),image_path);
             if (imageFile.exists()) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;

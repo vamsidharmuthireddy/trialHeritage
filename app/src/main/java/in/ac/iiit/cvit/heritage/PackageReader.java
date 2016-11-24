@@ -44,7 +44,6 @@ public class PackageReader {
         _packageName = packageName;
         dataLocation = context.getString(R.string.extracted_location);
         xmlFile = context.getString(R.string.xml_file);
-
         InterestPoints = new ArrayList<InterestPoint>();
         readFromFile();
     }

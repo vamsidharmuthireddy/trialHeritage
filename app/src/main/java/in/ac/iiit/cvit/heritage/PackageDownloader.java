@@ -130,7 +130,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                 }
 
                 //Log.i(LOGTAG, "Download Finished");
-                ExtractPackage(packageName);
+                ExtractPackage(basePackageName);
 
                 return "Package Download Completed";
             } else {
@@ -226,13 +226,14 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
     /**
      * Extracting the package from compresses tar.gz file
      *
-     * @param packageName name of the tar file with extension
+     * @param basePackageName name of the tar file with extension
      */
-    void ExtractPackage(String packageName) {
+    void ExtractPackage(String basePackageName) {
+        String packageName = basePackageName + _context.getString(R.string.package_format);
         File baseLocal = Environment.getExternalStorageDirectory();
         File archive = new File(baseLocal, COMPRESSED_DIR + packageName);
-        File destination = new File(baseLocal, EXTRACT_DIR);
-
+        File destination = new File(baseLocal, EXTRACT_DIR );
+        Log.v("downloading directory", Environment.getExternalStorageDirectory()+EXTRACT_DIR);
 
 
         try {
