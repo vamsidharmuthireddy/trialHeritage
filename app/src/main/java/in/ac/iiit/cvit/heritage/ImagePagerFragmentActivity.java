@@ -28,7 +28,7 @@ public class ImagePagerFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_slider);
 
-        //getting the name of the package selected by the user(For e.g. Golkonda)
+        //getting the name of the package selected by the user(For e.g. Golconda)
         sessionManager = new SessionManager();
         final String packageName = sessionManager
                 .getStringSessionPreferences(
@@ -65,7 +65,7 @@ public class ImagePagerFragmentActivity extends FragmentActivity {
         //Initializing the reader and getting the list of all the intterst points
         PackageReader reader;
         packageName = packageName.toLowerCase();
-        reader = new PackageReader(packageName);
+        reader = new PackageReader(packageName, ImagePagerFragmentActivity.this);
         ArrayList<InterestPoint> interestPoints = reader.getContents();
 
         //Searching for the relevant interest point and returning it

@@ -12,6 +12,7 @@ public class SessionManager {
     private static final int CONTEXT_MODE = 0;
     private static final String SESSION_PREFERENCES = "UserSession";
 
+
     public void setSessionPreferences(Context context, String key, String value) {
         SharedPreferences.Editor editor = context.getSharedPreferences(SESSION_PREFERENCES, CONTEXT_MODE).edit();
         editor.putString(key, value);

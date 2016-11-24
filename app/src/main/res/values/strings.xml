@@ -34,6 +34,12 @@
         <item>Golconda</item>
         <item>Hampi</item>
     </array>
+    <string name="package_download_url">http://preon.iiit.ac.in/~heritage/packages/</string>
+    <string name="extracted_location">Android/data/in.ac.iiit.cvit.heritage/files/extracted/</string>
+    <string name="compressed_location">Android/data/in.ac.iiit.cvit.heritage/files/compressed/</string>
+    <string name="package_format">.tar.gz</string>
+    <string name="xml_file">d.xml</string>
+
 
     <!--SessionManager-->
     <string name="user_session">UserSession</string>
@@ -46,6 +52,11 @@
     <string name="home">Home</string>
     <string name="nearby">Nearby</string>
     <string name="places">Places</string>
+
+    <!--Home Tab-->
+    <string name="home_golconda">
+        Golconda, also known as Golkonda, Golconda (Round shaped hill), or Golla konda (Shepherd\'s hill), is a citadel and fort in Southern India and was the capital of the medieval sultanate of the Qutub Shahi dynasty (c.1518–1687), is situated 11 kilometres (6.8 mi) west of Hyderabad. It is also a tehsil of Hyderabad district, Telangana, India. The region is known for the mines that have produced some of the world\'s most famous gems, including the Koh-i-Noor, the Hope Diamond and the Nassak Diamond.
+    </string>
 
     <!--Menu-->
     <string name="settings">Settings</string>
@@ -82,5 +93,9 @@
     <string name="interest_point_images">images</string>
     <string name="interest_point_info">info</string>
 
+    <!--Others-->
+    <string name="images_name_splitter">,</string>
+    <string name="image_type">.JPG</string>
+    <string name="packageNameKey">package</string>
 
 </resources>

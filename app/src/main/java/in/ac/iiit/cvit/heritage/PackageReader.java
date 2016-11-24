@@ -1,5 +1,6 @@
 package in.ac.iiit.cvit.heritage;
 
+import android.content.Context;
 import android.os.Environment;
 
 import org.w3c.dom.Document;
@@ -29,15 +30,21 @@ public class PackageReader {
      *
      */
 
-
+    private Context context;
     public String _packageName;
     InterestPoint interestPoint;
     ArrayList<InterestPoint> InterestPoints;
+    private final String dataLocation;
+    private final String xmlFile;
 
     public static final String LOGTAG = "Heritage";
 
-    public PackageReader(String packageName){
+    public PackageReader(String packageName, Context _context){
+        context = _context;
         _packageName = packageName;
+        dataLocation = context.getString(R.string.extracted_location);
+        xmlFile = context.getString(R.string.xml_file);
+
         InterestPoints = new ArrayList<InterestPoint>();
         readFromFile();
     }
@@ -95,7 +102,7 @@ public class PackageReader {
                         for(int j=0; j<keys.getLength(); j++){
                             if(keys.item(j).getNodeType() == Node.ELEMENT_NODE){
                                 Element key = (Element)keys.item(j);
-                                ///This interest point contains all the data relevent to particular interest point
+                                ///This interest point contains all the data relevant to particular interest point
                                 interestPoint.set(key.getNodeName(), key.getTextContent());
                             }
                         }
@@ -121,7 +128,7 @@ public class PackageReader {
     private void readFromFile(){
         File baseLocal = Environment.getExternalStorageDirectory();
 
-        File xmlfile = new File(baseLocal, "heritage/extracted/" + _packageName + "/d.xml");
+        File xmlfile = new File(baseLocal, dataLocation + _packageName + "/" + xmlFile );
         try {
             FileInputStream xmlStream = new FileInputStream(xmlfile);
             String contents = readTextFile(xmlStream);

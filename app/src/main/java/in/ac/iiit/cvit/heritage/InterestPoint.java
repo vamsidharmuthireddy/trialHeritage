@@ -17,6 +17,15 @@ public class InterestPoint {
     private HashMap<String, String> details;
     private SessionManager sessionManager;
 
+    private static final String dataLocation = "Android/data/in.ac.iiit.cvit.heritage/files/extracted/";
+    private static final String imageType = ".JPG";
+    private static final String latitudeTag = "lat";
+    private static final String longitudeTag = "long";
+    private static final String imageTag = "image";
+    private static final String imagesTag = "images";
+
+    private static final String imagesNameSplitter = ",";
+
 
     private static final String LOGTAG = "Heritage";
 
@@ -48,19 +57,20 @@ public class InterestPoint {
 
         packageName = packageName.toLowerCase();
 
-        String imageName = details.get("image");
-        Log.v("getImage","reached getImage");
+        String imageName = details.get(imageTag);
+ //       Log.v("getImage","reached getImage");
 
 
-            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/"+packageName+"/" + imageName + ".JPG";
+            String image_path = Environment.getExternalStorageDirectory() + "/" +
+                    dataLocation + packageName + "/" + imageName + imageType;
             Log.v("getImage", image_path);
             File imageFile = new File(image_path);
             if(imageFile.exists()) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-                bitmap = bitmap.createScaledBitmap(bitmap, 627, 353, false);
-                Log.v("getImage", imageName + ".JPG");
+    //            bitmap = bitmap.createScaledBitmap(bitmap, 627, 353, false);
+   //             Log.v("getImage", imageName + ".JPG");
 
                 return bitmap;
             }
@@ -82,29 +92,28 @@ public class InterestPoint {
 
 //        String[] image_names = {"a1", "a2", "a3", "a4", "a5"};
 
-        String allImages = details.get("images");
+        String allImages = details.get(imagesTag);
 
         //Log.v("getImages",interestPointName);
 
-        Log.v("getImages",allImages);
-        List<String> imagesList = Arrays.asList(allImages.split(","));
+//        Log.v("getImages",allImages);
+        List<String> imagesList = Arrays.asList(allImages.split(imagesNameSplitter));
 
         ArrayList<Bitmap> image_bitmaps = new ArrayList<Bitmap>();
 
 
         for (int i = 0; i < imagesList.size(); i++) {
-//            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/"+packageName+"/" + image_names[i] + ".JPG";
             String imageName = imagesList.get(i);
-            Log.v("getImages",imageName);
-            String image_path = Environment.getExternalStorageDirectory() + "/heritage/extracted/" + packageName + "/" + imageName + ".JPG";
-
+//            Log.v("getImages",imageName);
+            String image_path = Environment.getExternalStorageDirectory() + "/" +
+                    dataLocation + packageName + "/" + imageName + imageType;
 
             File imageFile = new File(image_path);
             if (imageFile.exists()) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-                bitmap = bitmap.createScaledBitmap(bitmap, 627, 353, false);
+//                bitmap = bitmap.createScaledBitmap(bitmap, 627, 353, false);
                 image_bitmaps.add(bitmap);
             }
         }
@@ -121,8 +130,8 @@ public class InterestPoint {
         double dLat, dLong;
         double sum;
 
-        pLat = Double.parseDouble(details.get("lat"));
-        pLong = Double.parseDouble(details.get("long"));
+        pLat = Double.parseDouble(details.get(latitudeTag));
+        pLong = Double.parseDouble(details.get(longitudeTag));
 
 //        Log.d("InterestPoint:distance", "pLat="+ pLat);
 //        Log.d("InterestPoint:distance", "pLong="+ pLong);
@@ -161,8 +170,8 @@ public class InterestPoint {
 //         Log.d("giveAngle", "b="+ b);
 //         Log.d("giveAngle", "c="+ c);
 
-        pLat = Double.parseDouble(details.get("lat"));
-        pLong = Double.parseDouble(details.get("long"));
+        pLat = Double.parseDouble(details.get(latitudeTag));
+        pLong = Double.parseDouble(details.get(longitudeTag));
         //        Log.d("InterestPoint:distance", "pLat="+ pLat);
         //        Log.d("InterestPoint:distance", "pLong="+ pLong);
 

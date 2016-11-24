@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<InterestPoint> LoadPackage(String packageName){
         PackageReader reader;
         packageName = packageName.toLowerCase();
-        reader = new PackageReader(packageName);
+        reader = new PackageReader(packageName, MainActivity.this);
         //This reader has all the information about all the interest points
         //We are getting an array of InterestPoint objects
         ArrayList<InterestPoint> interestPoints = reader.getContents();

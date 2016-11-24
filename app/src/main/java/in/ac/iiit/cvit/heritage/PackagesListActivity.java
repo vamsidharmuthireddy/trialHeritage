@@ -58,7 +58,7 @@ public class PackagesListActivity extends AppCompatActivity {
                 sessionManager.setSessionPreferences(PackagesListActivity.this, getString(R.string.package_name), packageName);
                 
                 Intent intent_main_activity = new Intent(PackagesListActivity.this, MainActivity.class);
-                intent_main_activity.putExtra("package", packageName);
+                intent_main_activity.putExtra(getString(R.string.packageNameKey), packageName);
                 startActivity(intent_main_activity);
             }
 

@@ -27,18 +27,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class PackageDownloader extends AsyncTask<String, String, String> {
-    public static final int READ_TIMEOUT = 15000;
-    public static final int CONNECTION_TIMEOUT = 10000;
-    public static final String LOGTAG = "Heritage";
-    public static final String EXTRACT_DIR = "heritage/extracted/";
-    public static final String COMPRESSED_DIR = "heritage/compressed/";
     /**
      * This class is used to download the package from particular website as a compressed file
      * and extract it
      */
+    public static final int READ_TIMEOUT = 15000;
+    public static final int CONNECTION_TIMEOUT = 10000;
+    public static final String LOGTAG = "Heritage";
+
+
     private URL url;
     private Context _context;
     private ProgressDialog progressDialog;
+
+    private final String EXTRACT_DIR;
+    private final String COMPRESSED_DIR;
+    private final String packageUrl;
+    private final String packageFormat;
 
     private HttpURLConnection httpURLConnection;
     private String packageName;
@@ -46,6 +51,11 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
 
     public PackageDownloader(Context context) {
         _context = context;
+
+        EXTRACT_DIR = _context.getString( R.string.extracted_location );
+        COMPRESSED_DIR = _context.getString( R.string.compressed_location);
+        packageUrl = _context.getString( R.string.package_download_url) ;
+        packageFormat = _context.getString( R.string.package_format);
     }
 
     /**
@@ -63,7 +73,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        Log.v(LOGTAG, "Progress is " + progressDialog.getProgress());
+ //       Log.v(LOGTAG, "Progress is " + progressDialog.getProgress());
     }
 
     /**
@@ -75,8 +85,9 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
         basePackageName = params[0];
-        packageName = params[0] + ".tar.gz";
-        String address = "http://preon.iiit.ac.in/~heritage/packages/" + packageName;
+        packageName = params[0] + packageFormat;
+        String address = packageUrl + packageName;
+        Log.v("doInBackground",address);
         initializeDirectory();
         File baseLocal = Environment.getExternalStorageDirectory();
 
@@ -168,8 +179,11 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
 
+                        SessionManager sessionManager = new SessionManager();
+                        sessionManager.setSessionPreferences(_context, _context.getString(R.string.package_name), basePackageName);
+
                         Intent intent_main_activity = new Intent(_context, MainActivity.class);
-                        intent_main_activity.putExtra("package", basePackageName);
+                        intent_main_activity.putExtra(_context.getString(R.string.packageNameKey), basePackageName);
                         _context.startActivity(intent_main_activity);
 
                     }
