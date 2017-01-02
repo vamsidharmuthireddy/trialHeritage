@@ -54,6 +54,7 @@ public class InterestPointActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.coordinatorlayout_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //setting up the interest point name as title on action bar in co-ordinator layout
         toolbar.setTitle(text_interest_point);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.coordinatorlayout_colltoolbar);
@@ -63,6 +64,7 @@ public class InterestPointActivity extends AppCompatActivity {
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.ToolbarStyle);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ToolbarStyle);
 
+        //setting up the interest point image as image in image view in co-ordinator layout
         imageView = (ImageView) findViewById(R.id.coordinatorlayout_imageview);
         imageView.setImageBitmap(interestPoint.getImage(packageName,text_interest_point));
 

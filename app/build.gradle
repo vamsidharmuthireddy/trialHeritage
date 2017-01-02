@@ -40,5 +40,4 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:9.4.0'
     compile 'com.android.support:multidex:1.0.0'
     compile files('libs/commons-compress-1.12.jar')
-    compile project(':openCVLibrary310')
 }

@@ -52,8 +52,8 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
                 String list_item = adapter.getItem(position).toLowerCase();
 
                 new AlertDialog.Builder(PackagesDownloaderActivity.this)
-                        .setMessage("Do you want to download the " + list_item + " package?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setMessage(getString(R.string.do_you_want_to_download_the) + list_item + getString(R.string.pack))
+                        .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 
                             // do something when the button is clicked
                             public void onClick(DialogInterface arg0, int arg1) {
@@ -63,7 +63,7 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
 
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
 
                             // do something when the button is clicked
                             public void onClick(DialogInterface arg0, int arg1) {

@@ -39,6 +39,15 @@
     <string name="compressed_location">Android/data/in.ac.iiit.cvit.heritage/files/compressed/</string>
     <string name="package_format">.tar.gz</string>
     <string name="xml_file">d.xml</string>
+    <string name="downloading">Downloading Package</string>
+    <string name="download_update">Download Update</string>
+    <string name="ok">OK</string>
+    <string name="click_to_view">Click to view</string>
+    <string name="package_not_downloaded">Package could not be downloaded</string>
+    <string name="do_you_want_to_download_the">"Do you want to download the "</string>
+    <string name="pack">" package?"</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 
     <!--SessionManager-->

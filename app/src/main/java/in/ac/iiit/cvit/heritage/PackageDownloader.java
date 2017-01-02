@@ -69,7 +69,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setIndeterminate(false);
         progressDialog.setProgress(0);
-        progressDialog.setMessage("Downloading Package");
+        progressDialog.setMessage(_context.getString(R.string.downloading));
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -172,10 +172,10 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(_context);
 
-        alertDialog.setTitle("Download Update");
+        alertDialog.setTitle(_context.getString(R.string.download_update));
 
         if(result.equals("Package Download Completed")){
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(_context.getString(R.string.ok), new DialogInterface.OnClickListener() {
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
 
@@ -189,19 +189,19 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                     }
                 });
 
-            alertDialog.setMessage(result+"\nClick to view "+basePackageName);
+            alertDialog.setMessage(result + "\n" + _context.getString(R.string.click_to_view) + basePackageName);
             alertDialog.show();
 
         }else{
 
-            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setPositiveButton(_context.getString(R.string.ok), new DialogInterface.OnClickListener() {
                 // do something when the button is clicked
                 public void onClick(DialogInterface arg0, int arg1) {
 
                 }
             });
 
-            alertDialog .setMessage("Package couldn't be downloaded");
+            alertDialog .setMessage(_context.getString(R.string.package_not_downloaded));
             alertDialog.show();
         }
 
