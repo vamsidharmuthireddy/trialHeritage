@@ -103,8 +103,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
 
             int responseCode = httpURLConnection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                //if package got downloaded, then store it in default storage location
-                //~storage/heritage/compressed/golkonda----if golkonda package is selected
+
                 File archive = new File(baseLocal, COMPRESSED_DIR + packageName);
                 FileOutputStream archiveStream = new FileOutputStream(archive);
 

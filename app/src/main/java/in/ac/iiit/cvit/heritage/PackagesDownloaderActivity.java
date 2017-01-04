@@ -37,7 +37,7 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
 
         //Packages available for download
        // String[] packages = {"Golconda", "Hampi"};
-        String[] packages = getResources().getStringArray(R.array.download_packages);
+        String[] packages = getResources().getStringArray(R.array.download_packages_list);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesDownloaderActivity.this, android.R.layout.simple_list_item_1, packages);
 
         listview_available_packages = (ListView) findViewById(R.id.listview_available_packages);

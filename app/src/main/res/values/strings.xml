@@ -2,43 +2,37 @@
 
     <!--SplashscreenAcivity-->
     <string name="heritage_caps">HERITAGE</string>
-    <string name="powered_by">Powered By</string>
+    <string name="powered_by" translatable="false">Powered By</string>
 
     <!--for the splashIntro screen-->
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="got_it">Got It</string>
-    <string name="page_number">page_number</string>
-    <string name="splash_intro_displays">3</string>
-    <string-array name="intro_caption">
-        <item>Know all about Indian Heritage</item>
-        <item>Realtime updates based on Site Location</item>
-        <item>Get all the information at your Fingertips</item>
-    </string-array>
+    <string name="page_number" translatable="false">page_number</string>
+    <string name="splash_intro_displays" translatable="false">3</string>
+    <string name="intro_caption_1">Know all about Indian Heritage</string>
+    <string name="intro_caption_2">Real time updates based on Site Location</string>
+    <string name="intro_caption_3">Get all the information at your Fingertips</string>
+
 
     <!--LaunchPreferenceManager-->
-    <string name="launch_preferences">launch_preferences</string>
-    <string name="IS_FIRST_TIME_LAUNCH">IsFirstTimeLaunch</string>
+    <string name="launch_preferences" translatable="false">launch_preferences</string>
+    <string name="IS_FIRST_TIME_LAUNCH" translatable="false">IsFirstTimeLaunch</string>
 
     <!--PackageListActivity screen-->
     <string name="my_heritage_sites">My Heritage Sites</string>
     <string name="download">Download</string>
-    <array name="my_packages">
-        <item>Golconda</item>
-        <item>Hampi</item>
-    </array>
+    <string name="my_packages_1">Golconda</string>
+    <string name="my_packages_2">Hampi</string>
+
 
     <!--PackageDownloaderActivity screen-->
     <string name="available_for_download">Click to download</string>
-    <array name="download_packages">
-        <item>Golconda</item>
-        <item>Hampi</item>
-    </array>
-    <string name="package_download_url">http://preon.iiit.ac.in/~heritage/packages/</string>
-    <string name="extracted_location">Android/data/in.ac.iiit.cvit.heritage/files/extracted/</string>
-    <string name="compressed_location">Android/data/in.ac.iiit.cvit.heritage/files/compressed/</string>
-    <string name="package_format">.tar.gz</string>
-    <string name="xml_file">d.xml</string>
+    <string name="package_download_url" translatable="false">http://preon.iiit.ac.in/~heritage/packages/</string>
+    <string name="extracted_location" translatable="false">Android/data/in.ac.iiit.cvit.heritage/files/extracted/</string>
+    <string name="compressed_location" translatable="false">Android/data/in.ac.iiit.cvit.heritage/files/compressed/</string>
+    <string name="package_format" translatable="false">.tar.gz</string>
+    <string name="xml_file" translatable="false">d.xml</string>
     <string name="downloading">Downloading Package</string>
     <string name="download_update">Download Update</string>
     <string name="ok">OK</string>
@@ -48,12 +42,15 @@
     <string name="pack">" package?"</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="download_packages_list_1">Golconda</string>
+    <string name="download_packages_list_2">Hampi</string>
+
 
 
     <!--SessionManager-->
-    <string name="user_session">UserSession</string>
-    <string name="package_name">package_name</string>
-    <string name="default_package_value"></string>
+    <string name="user_session" translatable="false">UserSession</string>
+    <string name="package_name" translatable="false">package_name</string>
+    <string name="default_package_value" translatable="false"></string>
 
 
     <!--MainActivity-->
@@ -79,7 +76,7 @@
     <string name="home_instructions">In the HOME tab, you can see the information about the heritage site that you have selected.</string>
     <string name="selecting_package">After you are done downloading the package, press back button and select the name of the package from the list of available packages. In the next screen you can see three tabs.</string>
     <string name="downloading_package">When you open the app, you see a list of packages available for you. You can access them once you download them using Download Package button and selecting the required package.</string>
-    <string name="first_time_instructions">first_time</string>
+    <string name="first_time_instructions" translatable="false">first_time</string>
 
     <!--InterestPointActivity-->
     <string name="images">Images</string>
@@ -88,23 +85,23 @@
     <string name="download_packages">Download Packages</string>
 
     <!--ImagePageAdapter-->
-    <string name="image_number">image_number</string>
+    <string name="image_number" translatable="false">image_number</string>
 
-    <!--clicked InterestPoint name-->
-    <string name="clicked_interest_point">interest_point</string>
+    <!--clicked InterestPoint Title-->
+    <string name="clicked_interest_point" translatable="false">interest_point</string>
 
     <!--xml tags-->
-    <string name="interest_point_title">title</string>
-    <string name="interest_point_latitude">lat</string>
-    <string name="interest_point_longitude">long</string>
-    <string name="interest_point_caption">caption</string>
-    <string name="interest_point_image">image</string>
-    <string name="interest_point_images">images</string>
-    <string name="interest_point_info">info</string>
+    <string name="interest_point_title" translatable="false">title</string>
+    <string name="interest_point_latitude" translatable="false">lat</string>
+    <string name="interest_point_longitude" translatable="false">long</string>
+    <string name="interest_point_caption" translatable="false">caption</string>
+    <string name="interest_point_image" translatable="false">image</string>
+    <string name="interest_point_images" translatable="false">images</string>
+    <string name="interest_point_info" translatable="false">info</string>
 
     <!--Others-->
-    <string name="images_name_splitter">,</string>
-    <string name="image_type">.JPG</string>
-    <string name="packageNameKey">package</string>
+    <string name="images_name_splitter" translatable="false">,</string>
+    <string name="image_type" translatable="false">.JPG</string>
+    <string name="packageNameKey" translatable="false">package</string>
 
 </resources>
