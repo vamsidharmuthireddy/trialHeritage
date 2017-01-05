@@ -17,24 +17,59 @@ public class PackagesListActivity extends AppCompatActivity {
      * This class starts SessionManager class to set the session and opens MainActivity related to that session
      */
     private Toolbar toolbar;
-    private Button button_download_packages;
     private ListView listview_package_list;
     private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_package_lists);
 
-        sessionManager = new SessionManager();
+        setContentView(R.layout.activity_menu);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitle(R.string.my_heritage_sites);
-        setSupportActionBar(toolbar);
+        Button B= (Button) findViewById(R.id.view_package);
+        B.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setContentView(R.layout.activity_package_lists);
+                sessionManager = new SessionManager();
 
-        //When Download packages button is pressed, show the list of packages available for download
-        button_download_packages = (Button) findViewById(R.id.button_download_packages);
-        button_download_packages.setText(R.string.download_packages);
+                toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+                toolbar.setTitle(R.string.my_heritage_sites);
+                setSupportActionBar(toolbar);
+
+                //When Download packages button is pressed, show the list of packages available for download
+
+                //Setting the packages to be displayed to the user
+                //String[] packages = {"Golconda", "Hampi"};
+                String[] packages = getResources().getStringArray(R.array.my_packages);
+                listview_package_list = (ListView) findViewById(R.id.listview_package_list);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesListActivity.this, android.R.layout.simple_list_item_1, packages);
+                listview_package_list.setAdapter(adapter);
+                listview_package_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        TextView textView = (TextView) view;
+                        //getting the name of the package which was clicked and setting the session
+                        String packageName = (String) textView.getText();
+                        sessionManager.setSessionPreferences(PackagesListActivity.this, getString(R.string.package_name), packageName);
+
+                        Intent intent_main_activity = new Intent(PackagesListActivity.this, MainActivity.class);
+                        intent_main_activity.putExtra(getString(R.string.packageNameKey), packageName);
+                        startActivity(intent_main_activity);
+                    }
+
+                });
+                Button button_back= (Button) findViewById(R.id.back);
+                button_back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent_back = new Intent(PackagesListActivity.this, PackagesListActivity.class);
+                        startActivity(intent_back);
+                    }
+                });
+            }
+        });
+        Button button_download_packages = (Button) findViewById(R.id.download_more);
         button_download_packages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,27 +77,25 @@ public class PackagesListActivity extends AppCompatActivity {
                 startActivity(intent_package_downloader);
             }
         });
-
-        //Setting the packages to be displayed to the user
-        //String[] packages = {"Golconda", "Hampi"};
-        String[] packages = getResources().getStringArray(R.array.my_packages);
-        listview_package_list = (ListView) findViewById(R.id.listview_package_list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesListActivity.this, android.R.layout.simple_list_item_1, packages);
-        listview_package_list.setAdapter(adapter);
-        listview_package_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Button button_instruct = (Button) findViewById(R.id.how);
+        button_instruct.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textView = (TextView) view;
-                //getting the name of the package which was clicked and setting the session
-                String packageName = (String) textView.getText();
-                sessionManager.setSessionPreferences(PackagesListActivity.this, getString(R.string.package_name), packageName);
-                
-                Intent intent_main_activity = new Intent(PackagesListActivity.this, MainActivity.class);
-                intent_main_activity.putExtra(getString(R.string.packageNameKey), packageName);
-                startActivity(intent_main_activity);
+            public void onClick(View v) {
+                Intent intent_instructions = new Intent(PackagesListActivity.this, InstructionsActivity.class);
+                intent_instructions.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent_instructions.putExtra(getString(R.string.first_time_instructions),true);
+                startActivity(intent_instructions);
+                finish();
             }
-
         });
+        Button button_options = (Button) findViewById(R.id.options);
+        button_options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override
