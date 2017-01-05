@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -52,8 +53,8 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
                 String list_item = adapter.getItem(position).toLowerCase();
 
                 new AlertDialog.Builder(PackagesDownloaderActivity.this)
-                        .setMessage(getString(R.string.do_you_want_to_download_the) + list_item + getString(R.string.pack))
-                        .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                        .setMessage(getString(R.string.do_you_want_to_download_the) + list_item + getString(R.string.pack) + getString(R.string.or_locate_it))
+                        .setPositiveButton(getString(R.string.download_file), new DialogInterface.OnClickListener() {
 
                             // do something when the button is clicked
                             public void onClick(DialogInterface arg0, int arg1) {
@@ -63,10 +64,12 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
 
                             }
                         })
-                        .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.locate_file), new DialogInterface.OnClickListener() {
 
                             // do something when the button is clicked
                             public void onClick(DialogInterface arg0, int arg1) {
+                                PackageLoader packageLoader = new PackageLoader(PackagesDownloaderActivity.this);
+                                packageLoader.showFileListDialog(Environment.getExternalStorageDirectory().toString());
                                 //onBackPressed();
                             }
                         })
@@ -83,6 +86,29 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
     public void onBackPressed(){
         super.onBackPressed();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

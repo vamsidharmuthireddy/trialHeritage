@@ -35,13 +35,17 @@
     <string name="xml_file" translatable="false">d.xml</string>
     <string name="downloading">Downloading Package</string>
     <string name="download_update">Download Update</string>
+    <string name="load_update">Load Update</string>
     <string name="ok">OK</string>
-    <string name="click_to_view">Click to view</string>
+    <string name="click_to_view">"Click to view "</string>
     <string name="package_not_downloaded">Package could not be downloaded</string>
     <string name="do_you_want_to_download_the">"Do you want to download the "</string>
-    <string name="pack">" package?"</string>
+    <string name="pack">" package "</string>
+    <string name="or_locate_it">"or Locate it in your mobile?"</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="download_file">Download</string>
+    <string name="locate_file">Locate</string>
     <string name="download_packages_list_1">Golconda</string>
     <string name="download_packages_list_2">Hampi</string>
 

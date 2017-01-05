@@ -232,7 +232,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
         File baseLocal = Environment.getExternalStorageDirectory();
         File archive = new File(baseLocal, COMPRESSED_DIR + packageName);
         File destination = new File(baseLocal, EXTRACT_DIR );
-        Log.v("downloading directory", Environment.getExternalStorageDirectory()+EXTRACT_DIR);
+        Log.v("Extracted directory", destination.toString());
 
 
         try {

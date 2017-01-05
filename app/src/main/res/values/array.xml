@@ -3,14 +3,14 @@
     <!--for the splashIntro screen-->
     <array name="intro_caption">
         <item>@string/intro_caption_1</item>
-        <item>@string/intro_caption_1</item>
-        <item>@string/intro_caption_1</item>
+        <item>@string/intro_caption_2</item>
+        <item>@string/intro_caption_3</item>
     </array>
 
     <!--PackageListActivity screen-->
     <array name="my_packages">
         <item>@string/my_packages_1</item>
-        <item>@string/my_packages_1</item>
+        <item>@string/my_packages_2</item>
     </array>
 
 
