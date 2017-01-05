@@ -182,6 +182,13 @@ public class PackageLoader  {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setIndeterminate(false);
+            progressDialog.setProgress(0);
+            progressDialog.setMessage(context.getString(R.string.loading));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
         }
 
@@ -195,10 +202,14 @@ public class PackageLoader  {
             return "Package Loading Completed";
         }
 
+        protected void onProgressUpdate(String... progress) {
+            // setting progress percentage
+            progressDialog.setProgress(Integer.parseInt(progress[0]));
+        }
 
         @Override
         protected void onPostExecute(String result) {
-
+            progressDialog.dismiss();
             Log.i(LOGTAG, result);
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
