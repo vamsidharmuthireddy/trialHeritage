@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="Menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/m"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <Button
+        android:text="My Packages"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_toolbar_height"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/view_package" />
+
+    <Button
+        android:text="Download More Packages"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_toolbar_height"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/download_more" />
+
+    <Button
+        android:text="How To Use"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_toolbar_height"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/how" />
+
+    <Button
+        android:text="Options"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_toolbar_height"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/options" />
+
+
+</LinearLayout>
