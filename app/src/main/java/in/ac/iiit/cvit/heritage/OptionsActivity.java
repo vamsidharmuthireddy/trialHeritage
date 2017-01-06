@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 /**
  * Created by HOME on 06-01-2017.
  */
@@ -24,19 +26,35 @@ public class OptionsActivity extends AppCompatActivity {
     private static int previousPosition = 0;
     private static final String LOGTAG = "OptionsActivity";
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_options);
+        String prevLanguage = Locale.getDefault().getLanguage();
+        if(previousPosition == 0 && !prevLanguage.equals(getString(R.string.english))){
+            if(prevLanguage.equals(getString(R.string.telugu))){
+                previousPosition = 1;
+            }else if(prevLanguage.equals(getString(R.string.hindi))){
+                previousPosition = 2;
+            }
 
+        }
+
+        Log.v(LOGTAG,"previous Language =  "+prevLanguage);
 
         LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
         localeManager.loadLocale();
+
+        String currentLanguage = Locale.getDefault().getLanguage();
+        Log.v(LOGTAG,"current Language =  "+currentLanguage);
         Log.v(LOGTAG,"misfire =  "+misfire.toString());
 
+        setContentView(R.layout.activity_options);
+
         setButtonListeners();
+
+
+
 
     }
 
@@ -77,13 +95,13 @@ public class OptionsActivity extends AppCompatActivity {
                             "You have selected English", Toast.LENGTH_SHORT)
                             .show();
                     LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
-                    localeManager.saveLocale("en");
+                    localeManager.saveLocale(getString(R.string.english));
 
                     Log.v(LOGTAG, "Selected English and previousPosition = " + previousPosition);
                     Log.v(LOGTAG, "Selected English and selected position = " + position);
                     previousPosition = position;
-                    Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
                     finish();
+                    Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
                     startActivity(refresh);
 
                 } else if (position == 1 && position != previousPosition) {
@@ -92,13 +110,13 @@ public class OptionsActivity extends AppCompatActivity {
                             "మీరు తెలుగు భాషని ఎంచుకున్నారు", Toast.LENGTH_SHORT)
                             .show();
                     LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
-                    localeManager.saveLocale("te");
+                    localeManager.saveLocale(getString(R.string.telugu));
 
                     Log.v(LOGTAG, "Selected Telugu and previousPosition = " + previousPosition);
                     Log.v(LOGTAG, "Selected Telugu and selected position = " + position);
                     previousPosition = position;
-                    Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
                     finish();
+                    Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
                     startActivity(refresh);
                 } else if (position == 2 && position != previousPosition) {
 
@@ -106,13 +124,13 @@ public class OptionsActivity extends AppCompatActivity {
                             "आप ने हिंदी भाषा को चुना है ", Toast.LENGTH_SHORT)
                             .show();
                     LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
-                    localeManager.saveLocale("hi");
+                    localeManager.saveLocale(getString(R.string.hindi));
 
                     Log.v(LOGTAG, "Selected Hindi and previousPosition = " + previousPosition);
                     Log.v(LOGTAG, "Selected Hindi and selected position = " + position);
                     previousPosition = position;
-                    Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
                     finish();
+                    Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
                     startActivity(refresh);
                 }
             }

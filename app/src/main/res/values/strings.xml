@@ -29,6 +29,9 @@
     <string name="how_to_use">HOW TO USE</string>
     <string name="language">LANGUAGE</string>
     <string name="select_a_language">Select a Language</string>
+    <string name="english">en</string>
+    <string name="telugu">te</string>
+    <string name="hindi">hi</string>
     <string name="available_languages_1" translatable="false">English</string>
     <string name="available_languages_2" translatable="false">తెలుగు</string>
     <string name="available_languages_3" translatable="false">हिंदी</string>
