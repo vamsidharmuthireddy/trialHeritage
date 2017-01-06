@@ -33,11 +33,14 @@ public class SplashActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        setContentView(R.layout.activity_splash);
 
         //Loading the language preference
         LocaleManager localeManager = new LocaleManager(SplashActivity.this);
         localeManager.loadLocale();
+
+        setContentView(R.layout.activity_splash);
+
+
 
         //This is the activity that is seen when app is initialised
 

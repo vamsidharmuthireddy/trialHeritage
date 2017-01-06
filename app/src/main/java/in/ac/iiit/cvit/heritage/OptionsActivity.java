@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,14 +39,14 @@ public class OptionsActivity extends AppCompatActivity {
 
         }
 
-        Log.v(LOGTAG,"previous Language =  "+prevLanguage);
+//        Log.v(LOGTAG,"previous Language =  "+prevLanguage);
 
         LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
         localeManager.loadLocale();
 
         String currentLanguage = Locale.getDefault().getLanguage();
-        Log.v(LOGTAG,"current Language =  "+currentLanguage);
-        Log.v(LOGTAG,"misfire =  "+misfire.toString());
+//        Log.v(LOGTAG,"current Language =  "+currentLanguage);
+//        Log.v(LOGTAG,"misfire =  "+misfire.toString());
 
         setContentView(R.layout.activity_options);
 
@@ -88,7 +87,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 misfire = !misfire;
-                Log.v(LOGTAG, "onItemSelected misfire = " + misfire);
+//                Log.v(LOGTAG, "onItemSelected misfire = " + misfire);
                 if (position == 0 && position != previousPosition) {
 
                     Toast.makeText(parent.getContext(),
@@ -97,8 +96,8 @@ public class OptionsActivity extends AppCompatActivity {
                     LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
                     localeManager.saveLocale(getString(R.string.english));
 
-                    Log.v(LOGTAG, "Selected English and previousPosition = " + previousPosition);
-                    Log.v(LOGTAG, "Selected English and selected position = " + position);
+ //                   Log.v(LOGTAG, "Selected English and previousPosition = " + previousPosition);
+   //                 Log.v(LOGTAG, "Selected English and selected position = " + position);
                     previousPosition = position;
                     finish();
                     Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
@@ -112,8 +111,8 @@ public class OptionsActivity extends AppCompatActivity {
                     LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
                     localeManager.saveLocale(getString(R.string.telugu));
 
-                    Log.v(LOGTAG, "Selected Telugu and previousPosition = " + previousPosition);
-                    Log.v(LOGTAG, "Selected Telugu and selected position = " + position);
+ //                   Log.v(LOGTAG, "Selected Telugu and previousPosition = " + previousPosition);
+   //                 Log.v(LOGTAG, "Selected Telugu and selected position = " + position);
                     previousPosition = position;
                     finish();
                     Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
@@ -126,8 +125,8 @@ public class OptionsActivity extends AppCompatActivity {
                     LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
                     localeManager.saveLocale(getString(R.string.hindi));
 
-                    Log.v(LOGTAG, "Selected Hindi and previousPosition = " + previousPosition);
-                    Log.v(LOGTAG, "Selected Hindi and selected position = " + position);
+//                    Log.v(LOGTAG, "Selected Hindi and previousPosition = " + previousPosition);
+//                    Log.v(LOGTAG, "Selected Hindi and selected position = " + position);
                     previousPosition = position;
                     finish();
                     Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);

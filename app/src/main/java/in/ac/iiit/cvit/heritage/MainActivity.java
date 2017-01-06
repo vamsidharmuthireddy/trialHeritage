@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(MainActivity.this);
+        localeManager.loadLocale();
         setContentView(R.layout.activity_main);
 
         //setting the clicked heritage site as a new session

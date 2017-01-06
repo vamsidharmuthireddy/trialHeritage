@@ -30,6 +30,9 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(PackagesDownloaderActivity.this);
+        localeManager.loadLocale();
         setContentView(R.layout.activity_package_downloader);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_main);

@@ -30,6 +30,9 @@ public class SplashIntroActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(SplashIntroActivity.this);
+        localeManager.loadLocale();
         setContentView(R.layout.activity_splash_slider);
 
         View decorView = getWindow().getDecorView();

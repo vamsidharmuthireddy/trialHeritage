@@ -24,6 +24,9 @@ public class PackagesListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(PackagesListActivity.this);
+        localeManager.loadLocale();
         setContentView(R.layout.activity_package_lists);
 
         sessionManager = new SessionManager();

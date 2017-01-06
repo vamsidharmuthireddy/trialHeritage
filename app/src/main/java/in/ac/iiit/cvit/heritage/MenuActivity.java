@@ -17,6 +17,9 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(MenuActivity.this);
+        localeManager.loadLocale();
         setContentView(R.layout.activity_menu);
 
         setButtonClickListeners();

@@ -24,7 +24,10 @@ public class InstructionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_instructions);
+
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(InstructionsActivity.this);
+        localeManager.loadLocale();
 
         first_time = getIntent().getExtras().getBoolean(getString(R.string.first_time_instructions));
 //        Log.v(LOGTAG, "first_time = " + first_time);

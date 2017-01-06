@@ -37,6 +37,9 @@ public class InterestPointActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(InterestPointActivity.this);
+        localeManager.loadLocale();
         setContentView(R.layout.activity_interest_point);
 
         //we are getting the name of the session(Heritage site that user initially clicked to see)
