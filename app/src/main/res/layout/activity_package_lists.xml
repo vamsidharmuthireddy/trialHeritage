@@ -11,17 +11,7 @@
         android:id="@+id/listview_package_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_main"
-        android:layout_above="@+id/button_download_packages" />
+        android:layout_below="@+id/toolbar_main"/>
 
-    <Button
-        android:id="@+id/back"
-        android:text="Back"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_toolbar_height"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/activity_std_margin"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorWhite" />
 
 </RelativeLayout>

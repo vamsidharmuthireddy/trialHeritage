@@ -40,7 +40,7 @@ public class InstructionsActivity extends AppCompatActivity {
                 done_with_instructions.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent_package_list = new Intent(InstructionsActivity.this, PackagesListActivity.class);
+                        Intent intent_package_list = new Intent(InstructionsActivity.this, MenuActivity.class);
                         intent_package_list.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent_package_list);
                         finish();
@@ -73,7 +73,7 @@ public class InstructionsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (first_time) {
-            Intent intent_package_list = new Intent(InstructionsActivity.this, PackagesListActivity.class);
+            Intent intent_package_list = new Intent(InstructionsActivity.this, MenuActivity.class);
             intent_package_list.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent_package_list);
             finish();

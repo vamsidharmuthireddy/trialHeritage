@@ -19,6 +19,20 @@
     <string name="launch_preferences" translatable="false">launch_preferences</string>
     <string name="IS_FIRST_TIME_LAUNCH" translatable="false">IsFirstTimeLaunch</string>
 
+    <!--MenuActivity screen-->
+    <string name="menu">Menu</string>
+    <string name="package_list">My Packages</string>
+    <string name="download_packages">Download More Packages</string>
+    <string name="options">Options</string>
+
+    <!--OptionsActivity screen-->
+    <string name="how_to_use">HOW TO USE</string>
+    <string name="language">LANGUAGE</string>
+    <string name="select_a_language">Select a Language</string>
+    <string name="available_languages_1" translatable="false">English</string>
+    <string name="available_languages_2" translatable="false">తెలుగు</string>
+    <string name="available_languages_3" translatable="false">हिंदी</string>
+
     <!--PackageListActivity screen-->
     <string name="my_heritage_sites">My Heritage Sites</string>
     <string name="download">Download</string>
@@ -87,7 +101,6 @@
     <string name="images">Images</string>
     <string name="videos">Videos</string>
     <string name="audio">Audio</string>
-    <string name="download_packages">Download Packages</string>
 
     <!--ImagePageAdapter-->
     <string name="image_number" translatable="false">image_number</string>

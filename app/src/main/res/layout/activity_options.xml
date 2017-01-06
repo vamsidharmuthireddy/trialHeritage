@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/toolbar_main" />
+
+    <Button
+        android:text="@string/how_to_use"
+        android:id="@+id/how_to_use"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_toolbar_height"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/language"
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_toolbar_height"
+            android:gravity="center"
+            android:layout_margin="@dimen/activity_std_margin"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:layout_weight="1"
+            />
+
+        <Spinner
+            android:id="@+id/language_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_toolbar_height"
+            android:layout_margin="@dimen/activity_std_margin"
+            android:background="@color/place_autocomplete_search_hint"
+            android:textColor="@color/colorBlack"
+            android:spinnerMode="dialog"
+            android:layout_weight="3">
+        </Spinner>
+
+    </LinearLayout>
+
+
+</LinearLayout>

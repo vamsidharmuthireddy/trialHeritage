@@ -34,6 +34,11 @@ public class SplashActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_splash);
+
+        //Loading the language preference
+        LocaleManager localeManager = new LocaleManager(SplashActivity.this);
+        localeManager.loadLocale();
+
         //This is the activity that is seen when app is initialised
 
         View decorView = getWindow().getDecorView();
@@ -51,7 +56,8 @@ public class SplashActivity extends AppCompatActivity {
 
                     if (!launchPreferenceManager.isFirstTimeLaunch()) {
                         //From second time whenever this app is opened, this activity is shown
-                        Intent intent_packages_list = new Intent(SplashActivity.this, PackagesListActivity.class);
+                        //Intent intent_packages_list = new Intent(SplashActivity.this, PackagesListActivity.class);
+                        Intent intent_packages_list = new Intent(SplashActivity.this, MenuActivity.class);
                         intent_packages_list.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent_packages_list);
                         finish();

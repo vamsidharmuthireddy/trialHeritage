@@ -7,6 +7,14 @@
         <item>@string/intro_caption_3</item>
     </array>
 
+    <!--OptionsActivity screen-->
+    <array name="available_languages">
+        <item>@string/available_languages_1</item>
+        <item>@string/available_languages_2</item>
+        <item>@string/available_languages_3</item>
+    </array>
+
+
     <!--PackageListActivity screen-->
     <array name="my_packages">
         <item>@string/my_packages_1</item>

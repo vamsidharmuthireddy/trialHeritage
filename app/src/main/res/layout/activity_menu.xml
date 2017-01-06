@@ -1,52 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <TextView
-        android:text="Menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/activity_std_margin"
+        android:text="@string/menu"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <Button
-        android:text="My Packages"
+        android:id="@+id/view_package"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_toolbar_height"
         android:layout_margin="@dimen/activity_std_margin"
         android:background="@color/colorPrimary"
-        android:textColor="@color/colorWhite"
-        android:id="@+id/view_package" />
+        android:text="@string/package_list"
+        android:textColor="@color/colorWhite" />
 
     <Button
-        android:text="Download More Packages"
+        android:id="@+id/download_more"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_toolbar_height"
         android:layout_margin="@dimen/activity_std_margin"
         android:background="@color/colorPrimary"
-        android:textColor="@color/colorWhite"
-        android:id="@+id/download_more" />
+        android:text="@string/download_packages"
+        android:textColor="@color/colorWhite" />
+
 
     <Button
-        android:text="How To Use"
+        android:id="@+id/options"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_toolbar_height"
         android:layout_margin="@dimen/activity_std_margin"
         android:background="@color/colorPrimary"
-        android:textColor="@color/colorWhite"
-        android:id="@+id/how" />
-
-    <Button
-        android:text="Options"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_toolbar_height"
-        android:layout_margin="@dimen/activity_std_margin"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorWhite"
-        android:id="@+id/options" />
+        android:text="@string/options"
+        android:textColor="@color/colorWhite" />
 
 
 </LinearLayout>
