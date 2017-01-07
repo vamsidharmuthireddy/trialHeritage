@@ -2,6 +2,7 @@ package in.ac.iiit.cvit.heritage;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,12 +19,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class PackageReader {
+    public static final String LOGTAG = "PackageReader";
+    private final String dataLocation;
+    private final String xmlFile;
+    public String _packageName;
+    InterestPoint interestPoint;
+    ArrayList<InterestPoint> InterestPoints;
     /**
      * This method is called from ActivityMain
      * This method gets all the interest points from the download package of particular site
@@ -31,19 +39,17 @@ public class PackageReader {
      */
 
     private Context context;
-    public String _packageName;
-    InterestPoint interestPoint;
-    ArrayList<InterestPoint> InterestPoints;
-    private final String dataLocation;
-    private final String xmlFile;
-
-    public static final String LOGTAG = "Heritage";
 
     public PackageReader(String packageName, Context _context){
         context = _context;
         _packageName = packageName;
         dataLocation = context.getString(R.string.extracted_location);
-        xmlFile = context.getString(R.string.xml_file);
+
+        String prevLanguage = Locale.getDefault().getLanguage();
+        xmlFile = _packageName + "_" + prevLanguage + context.getString(R.string.xml_extension);
+        Log.v(LOGTAG, "Name of the xml file is " + xmlFile);
+
+        //xmlFile = context.getString(R.string.xml_file);
         InterestPoints = new ArrayList<InterestPoint>();
         readFromFile();
     }

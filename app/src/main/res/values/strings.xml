@@ -49,7 +49,7 @@
     <string name="extracted_location" translatable="false">Android/data/in.ac.iiit.cvit.heritage/files/extracted/</string>
     <string name="compressed_location" translatable="false">Android/data/in.ac.iiit.cvit.heritage/files/compressed/</string>
     <string name="package_format" translatable="false">.tar.gz</string>
-    <string name="xml_file" translatable="false">d.xml</string>
+    <string name="xml_extension" translatable="false">.xml</string>
     <string name="downloading">Downloading Package</string>
     <string name="loading">Loading Package</string>
     <string name="download_update">Download Update</string>
