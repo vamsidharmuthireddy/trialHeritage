@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.util.Log;
 
 import java.util.Locale;
 
@@ -14,9 +13,9 @@ import java.util.Locale;
 
 public class LocaleManager {
 
+    private static final String LOGTAG = "LocaleManager";
     private Locale myLocale;
     private Context context;
-    private static final String LOGTAG = "LocaleManager";
 
     public LocaleManager(Context _context){
     context = _context;
@@ -44,7 +43,7 @@ public class LocaleManager {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(langPref, lang);
         editor.commit();
-        Log.v(LOGTAG,"saving language = "+lang);
+//        Log.v(LOGTAG,"saving language = "+lang);
 
     }
     public void loadLocale()
@@ -52,7 +51,7 @@ public class LocaleManager {
         String langPref = "Language";
         SharedPreferences prefs = context.getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
         String language = prefs.getString(langPref, "");
-        Log.v(LOGTAG,"loading language = "+language);
+//        Log.v(LOGTAG,"loading language = "+language);
         changeLang(language);
     }
 

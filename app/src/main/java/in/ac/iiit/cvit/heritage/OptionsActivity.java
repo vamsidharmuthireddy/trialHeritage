@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,33 +21,32 @@ import java.util.Locale;
 public class OptionsActivity extends AppCompatActivity {
 
 
+    private static final String LOGTAG = "OptionsActivity";
     private static SessionManager sessionManager;
     private static Boolean misfire = false;
     private static int previousPosition = 0;
-    private static final String LOGTAG = "OptionsActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         String prevLanguage = Locale.getDefault().getLanguage();
-        if(previousPosition == 0 && !prevLanguage.equals(getString(R.string.english))){
-            if(prevLanguage.equals(getString(R.string.telugu))){
-                previousPosition = 1;
-            }else if(prevLanguage.equals(getString(R.string.hindi))){
-                previousPosition = 2;
-            }
-
-        }
-
-//        Log.v(LOGTAG,"previous Language =  "+prevLanguage);
+        Log.v(LOGTAG, "previous Language =  " + prevLanguage);
 
         LocaleManager localeManager = new LocaleManager(OptionsActivity.this);
         localeManager.loadLocale();
 
         String currentLanguage = Locale.getDefault().getLanguage();
-//        Log.v(LOGTAG,"current Language =  "+currentLanguage);
-//        Log.v(LOGTAG,"misfire =  "+misfire.toString());
+        Log.v(LOGTAG, "current Language =  " + currentLanguage);
+
+        if (previousPosition == 0 && !currentLanguage.equals(getString(R.string.english))) {
+            if (currentLanguage.equals(getString(R.string.telugu))) {
+                previousPosition = 1;
+            } else if (currentLanguage.equals(getString(R.string.hindi))) {
+                previousPosition = 2;
+            }
+
+        }
 
         setContentView(R.layout.activity_options);
 
@@ -70,8 +70,6 @@ public class OptionsActivity extends AppCompatActivity {
         });
 
         Spinner spinner = (Spinner) findViewById(R.id.language_spinner);
-
-        //String sss = sessionManager.getStringSessionPreferences(OptionsActivity.this, getString(R.string.language),"0");
 
 
         //Log.v("OptionsActivity", sss);
@@ -132,6 +130,7 @@ public class OptionsActivity extends AppCompatActivity {
                     Intent refresh = new Intent(OptionsActivity.this, OptionsActivity.class);
                     startActivity(refresh);
                 }
+                Log.v(LOGTAG, "selected position is " + position);
             }
 
             @Override

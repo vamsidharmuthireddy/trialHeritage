@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Heritage</string>
+    <string name="app_name">"హెరిటేజ్ "</string>
     <string name="language">భాష</string>
+    <string name="nearby">"దగ్గర్లో "</string>
+    <string name="menu">మెను</string>
+    <string name="my_heritage_sites">"నా హెరిటేజ్ చోట్లు "</string>
 </resources>
