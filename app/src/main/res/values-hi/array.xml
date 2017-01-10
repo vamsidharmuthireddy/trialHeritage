@@ -10,14 +10,12 @@
     <!--PackageListActivity screen-->
     <array name="my_packages">
         <item>@string/my_packages_1</item>
-        <item>@string/my_packages_2</item>
     </array>
 
 
     <!--PackageDownloaderActivity screen-->
     <array name="download_packages_list">
         <item>@string/download_packages_list_1</item>
-        <item>@string/download_packages_list_2</item>
     </array>
 
 

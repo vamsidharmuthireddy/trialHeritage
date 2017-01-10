@@ -5,4 +5,8 @@
     <string name="nearby">"దగ్గర్లో "</string>
     <string name="menu">మెను</string>
     <string name="my_heritage_sites">"నా హెరిటేజ్ చోట్లు "</string>
+    <string name="download_packages_list_1">"గోల్కొండ "</string>
+    <string name="my_packages_1">"గోల్కొండ "</string>
+    <string name="my_packages_2">"హంపి "</string>
+    <string name="download_packages_list_2">"హంపి "</string>
 </resources>

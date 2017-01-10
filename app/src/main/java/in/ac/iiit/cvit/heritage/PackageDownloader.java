@@ -33,18 +33,14 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
      */
     public static final int READ_TIMEOUT = 15000;
     public static final int CONNECTION_TIMEOUT = 10000;
-    public static final String LOGTAG = "Heritage";
-
-
-    private URL url;
-    private Context _context;
-    private ProgressDialog progressDialog;
-
+    public static final String LOGTAG = "PackageDownloader";
     private final String EXTRACT_DIR;
     private final String COMPRESSED_DIR;
     private final String packageUrl;
     private final String packageFormat;
-
+    private URL url;
+    private Context _context;
+    private ProgressDialog progressDialog;
     private HttpURLConnection httpURLConnection;
     private String packageName;
     private String basePackageName;
@@ -87,7 +83,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
         basePackageName = params[0];
         packageName = params[0] + packageFormat;
         String address = packageUrl + packageName;
-        Log.v("doInBackground",address);
+        Log.i(LOGTAG, address);
         initializeDirectory();
         File baseLocal = Environment.getExternalStorageDirectory();
 
@@ -102,6 +98,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
             httpURLConnection.connect();
 
             int responseCode = httpURLConnection.getResponseCode();
+            Log.i(LOGTAG, "responseCode = " + responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK) {
 
                 File archive = new File(baseLocal, COMPRESSED_DIR + packageName);

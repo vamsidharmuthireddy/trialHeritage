@@ -5,4 +5,8 @@
     <string name="menu">"मेनू "</string>
     <string name="my_heritage_sites">"मेरे हेरिटेज स्थल "</string>
     <string name="nearby">पास मे</string>
+    <string name="download_packages_list_1">"गोलकोंडा "</string>
+    <string name="my_packages_1">"गोलकोंडा "</string>
+    <string name="my_packages_2">"हम्पी "</string>
+    <string name="download_packages_list_2">"हम्पी "</string>
 </resources>

@@ -12,20 +12,23 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.Locale;
+
 public class PackagesDownloaderActivity extends AppCompatActivity {
+    private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 3;
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 4;
+    private final String LOGTAG = "PackagesDownloaderActiv";
     /**
      * This class displays the packages available for download. Upon click, downloads the relevant package
      */
     private ListView listview_available_packages;
     private Toolbar toolbar;
-
-    private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 3;
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Packages available for download
-       // String[] packages = {"Golconda", "Hampi"};
+        // String[] packages = {"Golconda", "Hampi"};
         String[] packages = getResources().getStringArray(R.array.download_packages_list);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(PackagesDownloaderActivity.this, android.R.layout.simple_list_item_1, packages);
 
@@ -61,8 +64,16 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
 
                             // do something when the button is clicked
                             public void onClick(DialogInterface arg0, int arg1) {
+                                String currentLanguage = Locale.getDefault().getLanguage();
+                                //String list_item_copy = adapter.getItem(position).toLowerCase();
+                                LocaleManager localeManager = new LocaleManager(PackagesDownloaderActivity.this);
+                                localeManager.changeLang(getString(R.string.english));
 
-                                String list_item_copy = adapter.getItem(position).toLowerCase();
+                                String[] packages = getResources().getStringArray(R.array.download_packages_list);
+                                String list_item_copy = packages[position].toLowerCase();
+                                Log.v(LOGTAG, "default language packageName = " + list_item_copy);
+                                localeManager.changeLang(currentLanguage);
+
                                 new PackageDownloader(PackagesDownloaderActivity.this).execute(list_item_copy);
 
                             }
@@ -86,31 +97,9 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override

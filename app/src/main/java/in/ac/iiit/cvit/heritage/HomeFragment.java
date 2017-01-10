@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 
-    private static final String LOGTAG = "Heritage";
+    private static final String LOGTAG = "HomeFragment";
     SessionManager sessionManager;
 
     @Override
@@ -28,6 +29,7 @@ public class HomeFragment extends Fragment {
         Bitmap bitmap;
         TextView textView = (TextView) root.findViewById(R.id.home_text);
         ImageView imageView = (ImageView) root.findViewById(R.id.home_image);
+        Log.v(LOGTAG, "packageName = " + packageName);
         //final String[] packageNames = getResources().getStringArray(R.array.download_packages);
 
         //add the cases for the rest of the included packages

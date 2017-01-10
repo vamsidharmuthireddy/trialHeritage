@@ -50,9 +50,12 @@ public class OptionsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_options);
 
+
         setButtonListeners();
 
-
+        Spinner spinner = (Spinner) findViewById(R.id.language_spinner);
+        //spinner.setVisibility(View.INVISIBLE);
+        //spinner.setClickable(false);
 
 
     }

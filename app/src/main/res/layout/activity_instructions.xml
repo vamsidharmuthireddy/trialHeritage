@@ -16,7 +16,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="15dp"
-            android:text="Working of Heritage"
+            android:text="@string/working"
             android:textColor="@color/colorBlack"
             android:textSize="30sp" />
 
@@ -27,12 +27,34 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="15dp"
-            android:text="Downloading the package"
+            android:text="@string/menu"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/general_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/menu_instructions"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:text="@string/downloading_instructions_header"
+            android:textColor="@color/colorBlack"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/download_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -49,7 +71,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="15dp"
-            android:text="Selecting the downloaded package"
+            android:text="@string/selecting_package_header"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
 
@@ -72,7 +94,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="15dp"
-            android:text="HOME tab"
+            android:text="@string/home_tab_instructions_header"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
         <TextView
@@ -93,7 +115,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="15dp"
-            android:text="NEARBY tab"
+            android:text="@string/nearby_tab_instructions_header"
 
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
@@ -117,7 +139,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="15dp"
-            android:text="PLACES tab"
+            android:text="@string/places_tab_instructions_header"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
 
@@ -135,12 +157,12 @@
             android:id="@+id/done_with_instructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/got_it"
             android:layout_gravity="right"
             android:layout_marginTop="15dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:paddingTop="15dp"/>
+            android:paddingTop="15dp"
+            android:text="@string/got_it" />
 
     </LinearLayout>
 

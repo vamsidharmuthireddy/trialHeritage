@@ -24,14 +24,21 @@
     <string name="package_list">My Packages</string>
     <string name="download_packages">Download More Packages</string>
     <string name="options">Options</string>
+    <string name="working">"Working of Heritage"</string>
+    <string name="downloading_instructions_header">"Downloading the Package"</string>
+    <string name="selecting_package_header">Selecting the downloaded package</string>
+    <string name="home_tab_instructions_header">HOME tab</string>
+    <string name="nearby_tab_instructions_header">NEARBY tab</string>
+    <string name="places_tab_instructions_header">PLACES tab</string>
+
 
     <!--OptionsActivity screen-->
     <string name="how_to_use">HOW TO USE</string>
     <string name="language">LANGUAGE</string>
     <string name="select_a_language">Select a Language</string>
-    <string name="english">en</string>
-    <string name="telugu">te</string>
-    <string name="hindi">hi</string>
+    <string name="english" translatable="false">en</string>
+    <string name="telugu" translatable="false">te</string>
+    <string name="hindi" translatable="false">hi</string>
     <string name="available_languages_1" translatable="false">English</string>
     <string name="available_languages_2" translatable="false">తెలుగు</string>
     <string name="available_languages_3" translatable="false">हिंदी</string>
@@ -50,7 +57,7 @@
     <string name="compressed_location" translatable="false">Android/data/in.ac.iiit.cvit.heritage/files/compressed/</string>
     <string name="package_format" translatable="false">.tar.gz</string>
     <string name="xml_extension" translatable="false">.xml</string>
-    <string name="downloading">Downloading Package</string>
+    <string name="downloading">Downloading the Package</string>
     <string name="loading">Loading Package</string>
     <string name="download_update">Download Update</string>
     <string name="load_update">Load Update</string>
@@ -93,11 +100,12 @@
     <!--InstructionsActivity-->
     <string name="instructions">Instructions</string>
     <string name="general_instructions">General Instructions</string>
+    <string name="menu_instructions">Menu has three buttons. \"My Packages\" button takes you to the list of packages that you have in your app. \"Download More Packages\" button takes you to the list of packages that are available for download. \"Options\" button takes to the list of options available for the app.</string>
     <string name="nearby_instructions">This tab shows the list of three monuments/sites that are nearest to you.</string>
     <string name="places_instructions">This tab shows the list of all the important monuments and sites that you have to see at the heritage site that you are in. To see more information about a particular listed monument or a site, you can click on it</string>
     <string name="home_instructions">In the HOME tab, you can see the information about the heritage site that you have selected.</string>
-    <string name="selecting_package">After you are done downloading the package, press back button and select the name of the package from the list of available packages. In the next screen you can see three tabs.</string>
-    <string name="downloading_package">When you open the app, you see a list of packages available for you. You can access them once you download them using Download Package button and selecting the required package.</string>
+    <string name="selecting_package">After you are done downloading the package,go to \"My Packages\" in Menu and select the name of the package from the list of available packages. In the next screen you can see three tabs.</string>
+    <string name="downloading_package">Click the package that you want to download. An alert dialog will ask you to choose either \"Download\" or  \"Locate\". If you click \"Download\", the relevant package will be downloaded. If you already have the package in your mobile, click \"Locate\" button to select the package from storage. For example Golconda will have a package name of golconda.tar.gz. Look for the similar package while looking in the storage </string>
     <string name="first_time_instructions" translatable="false">first_time</string>
 
     <!--InterestPointActivity-->

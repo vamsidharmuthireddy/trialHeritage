@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class PackagesListActivity extends AppCompatActivity {
+    private final String LOGTAG = "PackageListActivity";
     /**
      * This class shows the list of all the heritage site packages.
      * This class starts SessionManager class to set the session and opens MainActivity related to that session
@@ -25,7 +29,7 @@ public class PackagesListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Loading the language preference
-        LocaleManager localeManager = new LocaleManager(PackagesListActivity.this);
+        final LocaleManager localeManager = new LocaleManager(PackagesListActivity.this);
         localeManager.loadLocale();
         setContentView(R.layout.activity_package_lists);
 
@@ -44,22 +48,30 @@ public class PackagesListActivity extends AppCompatActivity {
         listview_package_list.setAdapter(adapter);
         listview_package_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String currentLanguage = Locale.getDefault().getLanguage();
+
                 TextView textView = (TextView) view;
                 //getting the name of the package which was clicked and setting the session
-                String packageName = (String) textView.getText();
+                localeManager.changeLang(getString(R.string.english));
+                String[] packages = getResources().getStringArray(R.array.my_packages);
+                String packageName = packages[position].toLowerCase();
                 sessionManager.setSessionPreferences(PackagesListActivity.this, getString(R.string.package_name), packageName);
 
                 Intent intent_main_activity = new Intent(PackagesListActivity.this, MainActivity.class);
                 intent_main_activity.putExtra(getString(R.string.packageNameKey), packageName);
                 startActivity(intent_main_activity);
+
+                Log.v(LOGTAG, "default language packageName = " + packageName);
+                localeManager.changeLang(currentLanguage);
+
             }
 
         });
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(PackagesListActivity.this, MenuActivity.class);
         startActivity(intent);
     }
