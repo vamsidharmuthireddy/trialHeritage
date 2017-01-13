@@ -59,7 +59,7 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
                 String list_item = adapter.getItem(position).toLowerCase();
 
                 new AlertDialog.Builder(PackagesDownloaderActivity.this)
-                        .setMessage(getString(R.string.do_you_want_to_download_the) + list_item + getString(R.string.pack) + getString(R.string.or_locate_it))
+                        .setMessage(list_item + " : " + getString(R.string.do_you_want_to_download_the_package) + getString(R.string.or_locate_it))
                         .setPositiveButton(getString(R.string.download_file), new DialogInterface.OnClickListener() {
 
                             // do something when the button is clicked
