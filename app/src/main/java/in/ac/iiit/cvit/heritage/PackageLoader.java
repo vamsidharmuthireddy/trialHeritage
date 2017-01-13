@@ -29,15 +29,13 @@ import java.io.OutputStream;
 public class PackageLoader  {
 
 
-    private File[] fileList;
-    private String[] filenameList;
-
     private final String LOGTAG = "PackageLoader";
-    private Context context;
-    private ProgressDialog progressDialog;
     private final String EXTRACT_DIR;
     private final String packageFormat;
-
+    private File[] fileList;
+    private String[] filenameList;
+    private Context context;
+    private ProgressDialog progressDialog;
     private String temp;
     private String basePackageName;
 
@@ -172,9 +170,57 @@ public class PackageLoader  {
         return stringBuilder.toString();
     }
 
+    /**
+     * Extracting the package from compresses tar.gz file
+     *
+     * @param basePackageName name of the tar file with extension
+     */
+    void ExtractPackage(String basePackageName) {
+        String packageName = basePackageName;
+        File baseLocal = Environment.getExternalStorageDirectory();
+        File archive = new File(basePackageName);
+        File destination = new File(baseLocal, EXTRACT_DIR);
+        Log.v("Extracted directory", destination.toString());
+
+        if (!destination.exists()) {
+            destination.mkdirs();
+        }
+
+        try {
+            TarArchiveInputStream tarArchiveInputStream = new TarArchiveInputStream(
+                    new GzipCompressorInputStream(
+                            new BufferedInputStream(
+                                    new FileInputStream(archive))));
+
+            TarArchiveEntry entry = tarArchiveInputStream.getNextTarEntry();
+
+            while (entry != null) {
+
+                if (entry.isDirectory()) {
+                    entry = tarArchiveInputStream.getNextTarEntry();
+                    // Log.i(LOGTAG, "Found directory " + entry.getName());
+                    continue;
+                }
+
+                File currfile = new File(destination, entry.getName());
+                File parent = currfile.getParentFile();
+                if (!parent.exists()) {
+                    parent.mkdirs();
+                }
+
+                OutputStream out = new FileOutputStream(currfile);
+                IOUtils.copy(tarArchiveInputStream, out);
+                out.close();
+                //  Log.i(LOGTAG, entry.getName());
+                entry = tarArchiveInputStream.getNextTarEntry();
+            }
+            tarArchiveInputStream.close();
+        } catch (Exception e) {
+            //  Log.i(LOGTAG, e.toString());
+        }
 
 
-
+    }
 
     private class extractor extends AsyncTask<Void, Void, String> {
 
@@ -231,7 +277,7 @@ public class PackageLoader  {
                     }
                 });
 
-                alertDialog.setMessage(result + "\n" + context.getString(R.string.click_to_view) + basePackageName);
+                alertDialog.setMessage(context.getString(R.string.package_load_completed) + "\n" + context.getString(R.string.click_to_view));
                 alertDialog.show();
 
             } else {
@@ -243,62 +289,10 @@ public class PackageLoader  {
                     }
                 });
 
-                alertDialog.setMessage(context.getString(R.string.package_not_downloaded));
+                alertDialog.setMessage(context.getString(R.string.package_not_loaded));
                 alertDialog.show();
             }
         }
-
-    }
-
-    /**
-     * Extracting the package from compresses tar.gz file
-     *
-     * @param basePackageName name of the tar file with extension
-     */
-    void ExtractPackage(String basePackageName) {
-        String packageName = basePackageName;
-        File baseLocal = Environment.getExternalStorageDirectory();
-        File archive = new File(basePackageName);
-        File destination = new File(baseLocal, EXTRACT_DIR);
-        Log.v("Extracted directory", destination.toString());
-
-        if (!destination.exists()) {
-            destination.mkdirs();
-        }
-
-        try {
-            TarArchiveInputStream tarArchiveInputStream = new TarArchiveInputStream(
-                    new GzipCompressorInputStream(
-                            new BufferedInputStream(
-                                    new FileInputStream(archive))));
-
-            TarArchiveEntry entry = tarArchiveInputStream.getNextTarEntry();
-
-            while (entry != null) {
-
-                if (entry.isDirectory()) {
-                    entry = tarArchiveInputStream.getNextTarEntry();
-                    // Log.i(LOGTAG, "Found directory " + entry.getName());
-                    continue;
-                }
-
-                File currfile = new File(destination, entry.getName());
-                File parent = currfile.getParentFile();
-                if (!parent.exists()) {
-                    parent.mkdirs();
-                }
-
-                OutputStream out = new FileOutputStream(currfile);
-                IOUtils.copy(tarArchiveInputStream, out);
-                out.close();
-                //  Log.i(LOGTAG, entry.getName());
-                entry = tarArchiveInputStream.getNextTarEntry();
-            }
-            tarArchiveInputStream.close();
-        } catch (Exception e) {
-            //  Log.i(LOGTAG, e.toString());
-        }
-
 
     }
 

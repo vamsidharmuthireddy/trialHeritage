@@ -61,9 +61,12 @@
     <string name="loading">Loading Package</string>
     <string name="download_update">Download Update</string>
     <string name="load_update">Load Update</string>
+    <string name="package_download_completed">Package Download Completed</string>
+    <string name="package_load_completed">Package Loading Completed</string>
     <string name="ok">OK</string>
     <string name="click_to_view">"Click to view "</string>
     <string name="package_not_downloaded">Package could not be downloaded</string>
+    <string name="package_not_loaded">Package could not be Loaded</string>
     <string name="do_you_want_to_download_the_package">\"Do you want to download the package \"</string>
     <string name="or_locate_it">"or Locate it in your mobile?"</string>
     <string name="yes">Yes</string>

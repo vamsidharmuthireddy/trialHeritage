@@ -59,4 +59,7 @@
     <string name="videos">వీడియోలు</string>
     <string name="yes">అవును</string>
     <string name="working">హెరిటేజ్ పని చెయు తీరు</string>
+    <string name="package_download_completed">ప్యాకేజ్ డౌన్లోడింగ్  పూర్తయింది</string>
+    <string name="package_load_completed">ప్యాకేజ్ లోడింగ్ పూర్తయింది</string>
+    <string name="package_not_loaded">\"ప్యాకేజీని లోడ్ చేయలేకపోయాం \"</string>
 </resources>

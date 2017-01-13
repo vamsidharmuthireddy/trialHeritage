@@ -185,7 +185,7 @@ public class PackageDownloader extends AsyncTask<String, String, String> {
                     }
                 });
 
-            alertDialog.setMessage(result + "\n" + _context.getString(R.string.click_to_view) + basePackageName);
+            alertDialog.setMessage(_context.getString(R.string.package_download_completed) + "\n" + _context.getString(R.string.click_to_view));
             alertDialog.show();
 
         }else{
