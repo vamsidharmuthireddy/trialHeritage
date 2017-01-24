@@ -19,6 +19,9 @@ import java.util.Locale;
  */
 
 public class OptionsActivity extends AppCompatActivity {
+    /**
+     * This method is called when Options is clicked in Menu and displays the options
+     */
 
 
     private static final String LOGTAG = "OptionsActivity";

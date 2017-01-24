@@ -12,6 +12,9 @@ import java.util.Locale;
  */
 
 public class LocaleManager {
+    /**
+     * This class sets and the Locale for the app
+     */
 
     private static final String LOGTAG = "LocaleManager";
     private Locale myLocale;

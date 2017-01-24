@@ -12,6 +12,10 @@ import android.widget.Button;
  */
 
 public class MenuActivity extends AppCompatActivity {
+    /**
+     * This method display the menu
+     * @param savedInstanceState
+     */
 
 
     @Override

@@ -28,7 +28,9 @@ import java.io.OutputStream;
 
 public class PackageLoader  {
 
-
+    /**
+     * This class helps in manually locating package in s-card and loading it in app
+     */
     private final String LOGTAG = "PackageLoader";
     private final String EXTRACT_DIR;
     private final String packageFormat;
@@ -55,6 +57,12 @@ public class PackageLoader  {
 
     }
 */
+
+    /**
+     * This method loads the list of contents(folders and .tar.gz files) in the selected directory
+     * @param directory name of the clicked directory
+     * @return file names
+     */
 
     private File[] loadFileList(String directory) {
         File path = new File(directory);
@@ -87,8 +95,9 @@ public class PackageLoader  {
         }
     }
 
-    /**
-     * @param directory
+    /**This method displays the list of contents(folders and .tar.gz files) in the selected directory
+     *
+     * @param directory name of the clicked directory
      */
 
     public void showFileListDialog(final String directory) {
@@ -156,7 +165,8 @@ public class PackageLoader  {
 
 
     /**
-     * @param directory
+     * This method goes back to previous directory
+     * @param directory selected directory
      * @return
      */
     public String upOneDirectory(String directory) {
