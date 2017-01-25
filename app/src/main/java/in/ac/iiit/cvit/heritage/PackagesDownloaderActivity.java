@@ -6,10 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -33,6 +36,15 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Setting permissions
+        if (checkPermission()) {
+            Log.i(LOGTAG,"PackagesDownloaderActivity has storage permission");
+
+        } else {
+            requestPermission();
+        }
+
         //Loading the language preference
         LocaleManager localeManager = new LocaleManager(PackagesDownloaderActivity.this);
         localeManager.loadLocale();
@@ -93,7 +105,7 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
             }
         });
 
-        ActivityCompat.requestPermissions(PackagesDownloaderActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        //ActivityCompat.requestPermissions(PackagesDownloaderActivity.this,new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
     }
 
     @Override
@@ -101,6 +113,30 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    protected boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    protected void requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            Toast.makeText(this, "Write External Storage permission allows us to do store app related data. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+
+            ActivityCompat.requestPermissions(PackagesDownloaderActivity.this,
+                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+
+
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                ActivityCompat.requestPermissions(PackagesDownloaderActivity.this,
+                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+            }
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -108,11 +144,21 @@ public class PackagesDownloaderActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                } else {
+                    //openApplicationPermissions();
+                    Log.e("value", "Permission Denied, You cannot use local drive .");
+
+                }
+
             case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 } else {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(PackagesDownloaderActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        Toast.makeText(this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
                         openApplicationPermissions();
                     } else {
                         openApplicationPermissions();
