@@ -13,7 +13,7 @@
     <string name="audio">ఆడియో</string>
     <string name="available_for_download">డౌన్లోడ్కై క్లిక్ చేయండి</string>
     <string name="click_to_view">వీక్షించేందుకు క్లిక్ చేయండి</string>
-    <string name="do_you_want_to_download_the_package">మీరు ప్యాకేజీ డౌన్లోడ్ చెయ్యాలనుకుంటున్నారా</string>
+    <string name="do_you_want_to_download_the_package">"మీరు ప్యాకేజీ డౌన్లోడ్ చెయ్యాలనుకుంటున్నారా "</string>
     <string name="download">డౌన్లోడ్</string>
     <string name="download_file">డౌన్లోడ్</string>
     <string name="download_packages">మరిన్ని పాకేజీల డౌన్లోడ్</string>
@@ -44,7 +44,7 @@
     <string name="ok">సరే</string>
     <string name="no">వద్ధు</string>
     <string name="options">ఎంపికలు</string>
-    <string name="or_locate_it">లేదా మీ మొబైల్ లో గుర్తించండి?</string>
+    <string name="or_locate_it">లేదా మీ మొబైల్ లో గుర్తించాలనుకుంటున్నారా?</string>
     <string name="package_list">నా ప్యాకేజీలు</string>
     <string name="package_not_downloaded">"ప్యాకేజీని డౌన్లోడ్ చేయలేకపోయాం "</string>
     <string name="places">ప్రదేశాలు</string>

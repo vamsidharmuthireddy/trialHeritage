@@ -16,6 +16,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,12 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
-    private RecyclerView.LayoutManager recyclerViewLayoutManager;
+//    private RecyclerView.LayoutManager recyclerViewLayoutManager;//cannot be used to set the position after refresh
+    private LinearLayoutManager recyclerViewLayoutManager;
+
+    private static int yPosition;
+    private static int yIndex;
+    private static int itemOffset;
 
     private Context _context;
 
@@ -121,6 +127,29 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
     private void refreshRecyclerView() {
         //setting the view of the NEARBY tab
 //        Log.v(LOGTAG, "going to set sorted interest points");
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int yOffset = recyclerView.computeVerticalScrollOffset();
+                int index = recyclerViewLayoutManager.findFirstVisibleItemPosition();
+                View v = recyclerViewLayoutManager.getChildAt(0);
+                if(v != null){
+                    itemOffset = v.getTop();    //y-offset of an item
+                }
+                if(yOffset != 0) {
+                    yPosition = yOffset;        //y-offset of the entire view
+                    yIndex = index;             //index of first visible item
+                }
+
+            }
+        });
+        Log.i(LOGTAG,"scroll yPosition = "+yPosition+" yIndex = "+yIndex+" itemOffset = "+itemOffset);
+
+        //After refreshing the view with new data. The following line sets the position of view to previous one
+        recyclerViewLayoutManager.scrollToPositionWithOffset(yIndex,itemOffset);
         recyclerViewAdapter = new NearbyPointsRecyclerViewAdapter(sortedInterestPoints, getContext());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -478,7 +507,6 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
         }
 
         refreshRecyclerView();
-
     }
 
 
