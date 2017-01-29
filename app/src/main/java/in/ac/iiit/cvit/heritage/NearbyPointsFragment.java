@@ -496,14 +496,15 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
             });
 
 
-//            Log.d(LOGTAG, "angle1 = "+finalThreeAngleIndices.get(0).first * 180/Math.PI);
-//            Log.d(LOGTAG, "angle2 = "+finalThreeAngleIndices.get(1).first * 180/Math.PI);
-//            Log.d(LOGTAG, "angle3 = "+finalThreeAngleIndices.get(2).first * 180/Math.PI);
+            Log.i(LOGTAG, "angle0 = "+finalThreeAngleIndices.get(0).first * 180/Math.PI);
+            Log.i(LOGTAG, "angle1 = "+finalThreeAngleIndices.get(1).first * 180/Math.PI);
+            Log.i(LOGTAG, "angle2 = "+finalThreeAngleIndices.get(2).first * 180/Math.PI);
         }
         //setting the order of three points based on the view angles of the nearest points
         for (int i=0; i<Math.min(TRUNCATION_LIMIT, interestPoints.size()); i++) {
             interestPoint = interestPoints.get(finalThreeAngleIndices.get(i).second);
             sortedInterestPoints.set(i, interestPoint);
+            Log.i(LOGTAG,"interestPoint "+i+" = "+interestPoint.get(getString(R.string.interest_point_title)));
         }
 
         refreshRecyclerView();
