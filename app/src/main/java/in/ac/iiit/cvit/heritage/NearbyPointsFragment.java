@@ -360,9 +360,10 @@ public class NearbyPointsFragment extends Fragment implements SensorEventListene
 
 
                 oldAzimuth = azimuth;
-                azimuth = orientation[0];
-                pitch = orientation[1];
-                roll = orientation[2];
+                azimuth = (float) (180 * orientation[0] / Math.PI);
+                pitch = (float)(180 * orientation[1] / Math.PI);
+                roll = (float) (180 * orientation[2] / Math.PI);
+
 
                 if(azimuth < 0){
                     azimuth = azimuth + (float)Math.PI;
